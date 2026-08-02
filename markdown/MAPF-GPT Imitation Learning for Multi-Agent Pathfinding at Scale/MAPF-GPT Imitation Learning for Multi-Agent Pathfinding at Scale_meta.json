@@ -1,0 +1,672 @@
+{
+  "table_of_contents": [
+    {
+      "title": "MAPF-GPT: Imitation Learning for Multi-Agent Pathfinding at Scale",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          88.12799999999999,
+          94.24799999999999
+        ],
+        [
+          521.424,
+          94.24799999999999
+        ],
+        [
+          521.424,
+          111.88226318359375
+        ],
+        [
+          88.12799999999999,
+          111.88226318359375
+        ]
+      ]
+    },
+    {
+      "title": "Abstract",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          151.164,
+          214.63200000000003
+        ],
+        [
+          192.168,
+          214.63200000000003
+        ],
+        [
+          192.168,
+          228.0452880859375
+        ],
+        [
+          151.164,
+          228.0452880859375
+        ]
+      ]
+    },
+    {
+      "title": "Introduction",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          137.7,
+          475.99199999999996
+        ],
+        [
+          206.24400000000003,
+          475.99199999999996
+        ],
+        [
+          206.24400000000003,
+          490.509765625
+        ],
+        [
+          137.7,
+          490.509765625
+        ]
+      ]
+    },
+    {
+      "title": "Related Works",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          132.804,
+          222.55200000000002
+        ],
+        [
+          211.75199999999995,
+          222.55200000000002
+        ],
+        [
+          211.75199999999995,
+          236.86651611328125
+        ],
+        [
+          132.804,
+          236.86651611328125
+        ]
+      ]
+    },
+    {
+      "title": "Background",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          403.308,
+          510.84000000000003
+        ],
+        [
+          470.62800000000004,
+          510.84000000000003
+        ],
+        [
+          470.62800000000004,
+          524.8326416015625
+        ],
+        [
+          403.308,
+          524.8326416015625
+        ]
+      ]
+    },
+    {
+      "title": "Method",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          414.324,
+          245.52
+        ],
+        [
+          459.0,
+          245.52
+        ],
+        [
+          459.0,
+          258.282958984375
+        ],
+        [
+          414.324,
+          258.282958984375
+        ]
+      ]
+    },
+    {
+      "title": "Creating MAPF Scenarios",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          316.404,
+          335.01599999999996
+        ],
+        [
+          442.476,
+          335.01599999999996
+        ],
+        [
+          442.476,
+          348.06329345703125
+        ],
+        [
+          316.404,
+          348.06329345703125
+        ]
+      ]
+    },
+    {
+      "title": "Generating Ground Truth Data",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          316.404,
+          567.072
+        ],
+        [
+          466.956,
+          567.072
+        ],
+        [
+          466.956,
+          580.5281219482422
+        ],
+        [
+          316.404,
+          580.5281219482422
+        ]
+      ]
+    },
+    {
+      "title": "Tokenization",
+      "heading_level": null,
+      "page_id": 3,
+      "polygon": [
+        [
+          51.40800000000001,
+          575.784
+        ],
+        [
+          115.05599999999998,
+          575.784
+        ],
+        [
+          115.05599999999998,
+          588.2027740478516
+        ],
+        [
+          51.40800000000001,
+          588.2027740478516
+        ]
+      ]
+    },
+    {
+      "title": "Model Training",
+      "heading_level": null,
+      "page_id": 4,
+      "polygon": [
+        [
+          316.404,
+          108.50400000000002
+        ],
+        [
+          393.51599999999996,
+          108.50400000000002
+        ],
+        [
+          393.51599999999996,
+          120.46856689453125
+        ],
+        [
+          316.404,
+          120.46856689453125
+        ]
+      ]
+    },
+    {
+      "title": "Experimental Evaluation",
+      "heading_level": null,
+      "page_id": 4,
+      "polygon": [
+        [
+          370.26,
+          663.696
+        ],
+        [
+          503.676,
+          663.696
+        ],
+        [
+          503.676,
+          679.1959533691406
+        ],
+        [
+          370.26,
+          679.1959533691406
+        ]
+      ]
+    },
+    {
+      "title": "Conclusion",
+      "heading_level": null,
+      "page_id": 6,
+      "polygon": [
+        [
+          405.144,
+          497.376
+        ],
+        [
+          467.568,
+          497.376
+        ],
+        [
+          467.568,
+          511.48956298828125
+        ],
+        [
+          405.144,
+          511.48956298828125
+        ]
+      ]
+    },
+    {
+      "title": "",
+      "heading_level": null,
+      "page_id": 7,
+      "polygon": [
+        [
+          141.984,
+          51.480000000000004
+        ],
+        [
+          200.73600000000002,
+          51.480000000000004
+        ],
+        [
+          200.73600000000002,
+          64.152
+        ],
+        [
+          141.984,
+          64.152
+        ]
+      ]
+    }
+  ],
+  "page_stats": [
+    {
+      "page_id": 0,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          194
+        ],
+        [
+          "Line",
+          95
+        ],
+        [
+          "Text",
+          10
+        ],
+        [
+          "SectionHeader",
+          3
+        ],
+        [
+          "PageHeader",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 1,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          297
+        ],
+        [
+          "Line",
+          117
+        ],
+        [
+          "Text",
+          8
+        ],
+        [
+          "ListItem",
+          3
+        ],
+        [
+          "SectionHeader",
+          2
+        ],
+        [
+          "ListGroup",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 2,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          571
+        ],
+        [
+          "Line",
+          136
+        ],
+        [
+          "Text",
+          15
+        ],
+        [
+          "SectionHeader",
+          3
+        ],
+        [
+          "Equation",
+          2
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 3,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          180
+        ],
+        [
+          "Line",
+          85
+        ],
+        [
+          "Text",
+          5
+        ],
+        [
+          "Diagram",
+          2
+        ],
+        [
+          "Caption",
+          2
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 4,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          454
+        ],
+        [
+          "Line",
+          124
+        ],
+        [
+          "Text",
+          11
+        ],
+        [
+          "SectionHeader",
+          2
+        ],
+        [
+          "Equation",
+          2
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 5,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          334
+        ],
+        [
+          "Line",
+          128
+        ],
+        [
+          "Text",
+          8
+        ],
+        [
+          "Figure",
+          2
+        ],
+        [
+          "Caption",
+          2
+        ],
+        [
+          "FigureGroup",
+          2
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 6,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          317
+        ],
+        [
+          "Line",
+          109
+        ],
+        [
+          "Text",
+          10
+        ],
+        [
+          "Caption",
+          3
+        ],
+        [
+          "Table",
+          2
+        ],
+        [
+          "TableGroup",
+          2
+        ],
+        [
+          "Figure",
+          1
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ],
+        [
+          "FigureGroup",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 7,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          299
+        ],
+        [
+          "Line",
+          115
+        ],
+        [
+          "ListItem",
+          3
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "ListGroup",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 8,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          261
+        ],
+        [
+          "Line",
+          110
+        ],
+        [
+          "ListItem",
+          2
+        ],
+        [
+          "ListGroup",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    }
+  ],
+  "debug_data_path": "debug_data/MAPF-GPT Imitation Learning for Multi-Agent Pathfinding at Scale"
+}

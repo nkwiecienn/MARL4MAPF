@@ -1,0 +1,791 @@
+{
+  "table_of_contents": [
+    {
+      "title": "A Flexible Vehicle Routing Reinforcement Learning Environment\nfor the Reusability of Trained Agents",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          49.572,
+          79.992
+        ],
+        [
+          560.592,
+          79.992
+        ],
+        [
+          560.592,
+          119.63006591796875
+        ],
+        [
+          49.572,
+          119.63006591796875
+        ]
+      ]
+    },
+    {
+      "title": "ABSTRACT",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          50.79600000000001,
+          241.56
+        ],
+        [
+          111.99600000000001,
+          241.56
+        ],
+        [
+          111.99600000000001,
+          256.123046875
+        ],
+        [
+          50.79600000000001,
+          256.123046875
+        ]
+      ]
+    },
+    {
+      "title": "KEYWORDS",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          50.79600000000001,
+          398.376
+        ],
+        [
+          115.66799999999999,
+          398.376
+        ],
+        [
+          115.66799999999999,
+          412.6789855957031
+        ],
+        [
+          50.79600000000001,
+          412.6789855957031
+        ]
+      ]
+    },
+    {
+      "title": "ACM Reference Format:",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          50.79600000000001,
+          441.144
+        ],
+        [
+          140.76,
+          441.144
+        ],
+        [
+          140.76,
+          452.6470947265625
+        ],
+        [
+          50.79600000000001,
+          452.6470947265625
+        ]
+      ]
+    },
+    {
+      "title": "1 INTRODUCTION",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          50.79600000000001,
+          513.216
+        ],
+        [
+          156.67200000000003,
+          513.216
+        ],
+        [
+          156.67200000000003,
+          528.14599609375
+        ],
+        [
+          50.79600000000001,
+          528.14599609375
+        ]
+      ]
+    },
+    {
+      "title": "2 LITERATURE REVIEW",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          313.34400000000005,
+          647.856
+        ],
+        [
+          451.044,
+          647.856
+        ],
+        [
+          451.044,
+          663.2920074462891
+        ],
+        [
+          313.34400000000005,
+          663.2920074462891
+        ]
+      ]
+    },
+    {
+      "title": "",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          50.79600000000001,
+          648.6479999999999
+        ],
+        [
+          244.8,
+          648.6479999999999
+        ],
+        [
+          244.8,
+          662.112
+        ],
+        [
+          50.79600000000001,
+          662.112
+        ]
+      ]
+    },
+    {
+      "title": "",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          313.956,
+          530.6400000000001
+        ],
+        [
+          405.75600000000003,
+          530.6400000000001
+        ],
+        [
+          405.75600000000003,
+          543.312
+        ],
+        [
+          313.956,
+          543.312
+        ]
+      ]
+    },
+    {
+      "title": "3.2 Observation Space",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          50.184000000000005,
+          397.58399999999995
+        ],
+        [
+          169.524,
+          397.58399999999995
+        ],
+        [
+          169.524,
+          412.13482666015625
+        ],
+        [
+          50.184000000000005,
+          412.13482666015625
+        ]
+      ]
+    },
+    {
+      "title": "3.3 Finished episode conditions",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          314.56800000000004,
+          82.368
+        ],
+        [
+          481.032,
+          82.368
+        ],
+        [
+          481.032,
+          96.1907958984375
+        ],
+        [
+          314.56800000000004,
+          96.1907958984375
+        ]
+      ]
+    },
+    {
+      "title": "4 TRAINED MODEL REUSABILITY",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          314.56800000000004,
+          561.528
+        ],
+        [
+          501.22799999999995,
+          561.528
+        ],
+        [
+          501.22799999999995,
+          575.6210021972656
+        ],
+        [
+          314.56800000000004,
+          575.6210021972656
+        ]
+      ]
+    },
+    {
+      "title": "Algorithm 1: Training process of the RL agent.",
+      "heading_level": null,
+      "page_id": 3,
+      "polygon": [
+        [
+          56.304,
+          192.45600000000002
+        ],
+        [
+          234.39600000000002,
+          192.45600000000002
+        ],
+        [
+          234.39600000000002,
+          204.33599999999998
+        ],
+        [
+          56.304,
+          204.33599999999998
+        ]
+      ]
+    },
+    {
+      "title": "5 EXPERIMENTATION",
+      "heading_level": null,
+      "page_id": 3,
+      "polygon": [
+        [
+          312.73199999999997,
+          375.408
+        ],
+        [
+          440.02799999999996,
+          375.408
+        ],
+        [
+          440.02799999999996,
+          387.288
+        ],
+        [
+          312.73199999999997,
+          387.288
+        ]
+      ]
+    },
+    {
+      "title": "6 RESULTS",
+      "heading_level": null,
+      "page_id": 4,
+      "polygon": [
+        [
+          50.184000000000005,
+          473.616
+        ],
+        [
+          117.50399999999999,
+          473.616
+        ],
+        [
+          117.50399999999999,
+          487.9499816894531
+        ],
+        [
+          50.184000000000005,
+          487.9499816894531
+        ]
+      ]
+    },
+    {
+      "title": "6.1 Model Reusability",
+      "heading_level": null,
+      "page_id": 4,
+      "polygon": [
+        [
+          314.56800000000004,
+          528.2640000000001
+        ],
+        [
+          432.6860046386719,
+          528.2640000000001
+        ],
+        [
+          432.6860046386719,
+          542.7440032958984
+        ],
+        [
+          314.56800000000004,
+          542.7440032958984
+        ]
+      ]
+    },
+    {
+      "title": "7 CONCLUSIONS AND FUTURE WORKS",
+      "heading_level": null,
+      "page_id": 5,
+      "polygon": [
+        [
+          50.184000000000005,
+          647.856
+        ],
+        [
+          264.996,
+          647.856
+        ],
+        [
+          264.996,
+          663.2920074462891
+        ],
+        [
+          50.184000000000005,
+          663.2920074462891
+        ]
+      ]
+    },
+    {
+      "title": "ACKNOWLEDGMENTS",
+      "heading_level": null,
+      "page_id": 5,
+      "polygon": [
+        [
+          313.956,
+          403.12800000000004
+        ],
+        [
+          435.74399999999997,
+          403.12800000000004
+        ],
+        [
+          435.74399999999997,
+          417.2149963378906
+        ],
+        [
+          313.956,
+          417.2149963378906
+        ]
+      ]
+    },
+    {
+      "title": "REFERENCES",
+      "heading_level": null,
+      "page_id": 5,
+      "polygon": [
+        [
+          313.956,
+          484.70399999999995
+        ],
+        [
+          387.396,
+          484.70399999999995
+        ],
+        [
+          387.396,
+          499.9049987792969
+        ],
+        [
+          313.956,
+          499.9049987792969
+        ]
+      ]
+    }
+  ],
+  "page_stats": [
+    {
+      "page_id": 0,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          223
+        ],
+        [
+          "Line",
+          100
+        ],
+        [
+          "Text",
+          16
+        ],
+        [
+          "SectionHeader",
+          6
+        ],
+        [
+          "ListGroup",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ],
+        [
+          "Reference",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 1,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          215
+        ],
+        [
+          "Line",
+          94
+        ],
+        [
+          "Text",
+          15
+        ],
+        [
+          "Reference",
+          3
+        ],
+        [
+          "PageHeader",
+          2
+        ],
+        [
+          "SectionHeader",
+          2
+        ],
+        [
+          "Diagram",
+          1
+        ],
+        [
+          "Caption",
+          1
+        ],
+        [
+          "Equation",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 2,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          275
+        ],
+        [
+          "Line",
+          109
+        ],
+        [
+          "Text",
+          13
+        ],
+        [
+          "Reference",
+          5
+        ],
+        [
+          "SectionHeader",
+          3
+        ],
+        [
+          "PageHeader",
+          2
+        ],
+        [
+          "Equation",
+          2
+        ],
+        [
+          "ListItem",
+          2
+        ],
+        [
+          "Diagram",
+          1
+        ],
+        [
+          "Caption",
+          1
+        ],
+        [
+          "ListGroup",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 3,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Text",
+          17
+        ],
+        [
+          "SectionHeader",
+          5
+        ],
+        [
+          "PageHeader",
+          4
+        ],
+        [
+          "Caption",
+          4
+        ],
+        [
+          "Reference",
+          4
+        ],
+        [
+          "Table",
+          2
+        ],
+        [
+          "ListGroup",
+          2
+        ],
+        [
+          "Footnote",
+          2
+        ],
+        [
+          "PageFooter",
+          2
+        ],
+        [
+          "Picture",
+          1
+        ],
+        [
+          "Diagram",
+          1
+        ],
+        [
+          "TableGroup",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 4,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          142
+        ],
+        [
+          "Line",
+          68
+        ],
+        [
+          "Text",
+          11
+        ],
+        [
+          "Reference",
+          3
+        ],
+        [
+          "PageHeader",
+          2
+        ],
+        [
+          "Figure",
+          2
+        ],
+        [
+          "Caption",
+          2
+        ],
+        [
+          "SectionHeader",
+          2
+        ],
+        [
+          "FigureGroup",
+          2
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 5,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          213
+        ],
+        [
+          "Line",
+          85
+        ],
+        [
+          "Text",
+          12
+        ],
+        [
+          "Reference",
+          10
+        ],
+        [
+          "SectionHeader",
+          3
+        ],
+        [
+          "PageHeader",
+          2
+        ],
+        [
+          "Diagram",
+          1
+        ],
+        [
+          "Caption",
+          1
+        ],
+        [
+          "ListGroup",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 6,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          121
+        ],
+        [
+          "Line",
+          34
+        ],
+        [
+          "Text",
+          16
+        ],
+        [
+          "Reference",
+          12
+        ],
+        [
+          "PageHeader",
+          2
+        ],
+        [
+          "ListGroup",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    }
+  ],
+  "debug_data_path": "debug_data/A Flexible Vehicle Routing Reinforcement Learning Environment for the Reusability of Trained Agents"
+}

@@ -1,0 +1,816 @@
+{
+  "table_of_contents": [
+    {
+      "title": "LaCAM: Search-Based Algorithm for Quick Multi-Agent Pathfinding",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          88.12799999999999,
+          95.03999999999999
+        ],
+        [
+          520.2,
+          95.03999999999999
+        ],
+        [
+          520.2,
+          111.88226318359375
+        ],
+        [
+          88.12799999999999,
+          111.88226318359375
+        ]
+      ]
+    },
+    {
+      "title": "Abstract",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          151.164,
+          214.63200000000003
+        ],
+        [
+          191.78732299804688,
+          214.63200000000003
+        ],
+        [
+          191.78732299804688,
+          228.04522705078125
+        ],
+        [
+          151.164,
+          228.04522705078125
+        ]
+      ]
+    },
+    {
+      "title": "1 Introduction",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          128.51999999999998,
+          380.952
+        ],
+        [
+          214.812,
+          380.952
+        ],
+        [
+          214.812,
+          396.5366516113281
+        ],
+        [
+          128.51999999999998,
+          396.5366516113281
+        ]
+      ]
+    },
+    {
+      "title": "2 Preliminaries",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          391.68,
+          587.664
+        ],
+        [
+          482.1402587890625,
+          587.664
+        ],
+        [
+          482.1402587890625,
+          602.5252990722656
+        ],
+        [
+          391.68,
+          602.5252990722656
+        ]
+      ]
+    },
+    {
+      "title": "3 Algorithm",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          134.64000000000001,
+          498.168
+        ],
+        [
+          208.78170776367188,
+          498.168
+        ],
+        [
+          208.78170776367188,
+          513.3274230957031
+        ],
+        [
+          134.64000000000001,
+          513.3274230957031
+        ]
+      ]
+    },
+    {
+      "title": "3.1 Concept",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          50.184000000000005,
+          547.2719999999999
+        ],
+        [
+          118.116,
+          547.2719999999999
+        ],
+        [
+          118.116,
+          561.4218139648438
+        ],
+        [
+          50.184000000000005,
+          561.4218139648438
+        ]
+      ]
+    },
+    {
+      "title": "3.2 Pseudocode",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          50.79600000000001,
+          510.84000000000003
+        ],
+        [
+          133.0902099609375,
+          510.84000000000003
+        ],
+        [
+          133.0902099609375,
+          525.2205200195312
+        ],
+        [
+          50.79600000000001,
+          525.2205200195312
+        ]
+      ]
+    },
+    {
+      "title": "3.3 Implementation Details",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          316.404,
+          620.1360000000001
+        ],
+        [
+          454.104,
+          620.1360000000001
+        ],
+        [
+          454.104,
+          634.6419830322266
+        ],
+        [
+          316.404,
+          634.6419830322266
+        ]
+      ]
+    },
+    {
+      "title": "4 Evaluation",
+      "heading_level": null,
+      "page_id": 3,
+      "polygon": [
+        [
+          396.576,
+          312.048
+        ],
+        [
+          475.5589294433594,
+          312.048
+        ],
+        [
+          475.5589294433594,
+          327.08734130859375
+        ],
+        [
+          396.576,
+          327.08734130859375
+        ]
+      ]
+    },
+    {
+      "title": "4.1 Experimental Setup",
+      "heading_level": null,
+      "page_id": 3,
+      "polygon": [
+        [
+          316.404,
+          401.54400000000004
+        ],
+        [
+          437.0772705078125,
+          401.54400000000004
+        ],
+        [
+          437.0772705078125,
+          415.857666015625
+        ],
+        [
+          316.404,
+          415.857666015625
+        ]
+      ]
+    },
+    {
+      "title": "4.2 Small Complicated Instances",
+      "heading_level": null,
+      "page_id": 5,
+      "polygon": [
+        [
+          50.79600000000001,
+          52.272
+        ],
+        [
+          214.2,
+          52.272
+        ],
+        [
+          214.2,
+          66.24298095703125
+        ],
+        [
+          50.79600000000001,
+          66.24298095703125
+        ]
+      ]
+    },
+    {
+      "title": "4.3 MAPF Benchmark",
+      "heading_level": null,
+      "page_id": 5,
+      "polygon": [
+        [
+          50.79600000000001,
+          232.05599999999998
+        ],
+        [
+          167.688,
+          232.05599999999998
+        ],
+        [
+          167.688,
+          245.68084716796875
+        ],
+        [
+          50.79600000000001,
+          245.68084716796875
+        ]
+      ]
+    },
+    {
+      "title": "4.4 Adversarial Instance",
+      "heading_level": null,
+      "page_id": 5,
+      "polygon": [
+        [
+          50.79600000000001,
+          554.4
+        ],
+        [
+          175.7008056640625,
+          554.4
+        ],
+        [
+          175.7008056640625,
+          568.6236114501953
+        ],
+        [
+          50.79600000000001,
+          568.6236114501953
+        ]
+      ]
+    },
+    {
+      "title": "4.5 Scalability Test",
+      "heading_level": null,
+      "page_id": 5,
+      "polygon": [
+        [
+          315.79200000000003,
+          465.696
+        ],
+        [
+          414.93600000000004,
+          465.696
+        ],
+        [
+          414.93600000000004,
+          479.3598327636719
+        ],
+        [
+          315.79200000000003,
+          479.3598327636719
+        ]
+      ]
+    },
+    {
+      "title": "4.6 Design Choice of LaCAM",
+      "heading_level": null,
+      "page_id": 5,
+      "polygon": [
+        [
+          315.79200000000003,
+          566.28
+        ],
+        [
+          463.896,
+          566.28
+        ],
+        [
+          463.896,
+          580.4097900390625
+        ],
+        [
+          315.79200000000003,
+          580.4097900390625
+        ]
+      ]
+    },
+    {
+      "title": "5 Related Work",
+      "heading_level": null,
+      "page_id": 6,
+      "polygon": [
+        [
+          125.46000000000001,
+          291.456
+        ],
+        [
+          217.87199999999999,
+          291.456
+        ],
+        [
+          217.87199999999999,
+          307.3354797363281
+        ],
+        [
+          125.46000000000001,
+          307.3354797363281
+        ]
+      ]
+    },
+    {
+      "title": "6 Conclusion and Discussion",
+      "heading_level": null,
+      "page_id": 6,
+      "polygon": [
+        [
+          358.02,
+          146.51999999999998
+        ],
+        [
+          515.9159999999999,
+          146.51999999999998
+        ],
+        [
+          515.9159999999999,
+          161.22216796875
+        ],
+        [
+          358.02,
+          161.22216796875
+        ]
+      ]
+    },
+    {
+      "title": "",
+      "heading_level": null,
+      "page_id": 7,
+      "polygon": [
+        [
+          123.62400000000002,
+          51.480000000000004
+        ],
+        [
+          220.32,
+          51.480000000000004
+        ],
+        [
+          220.32,
+          64.944
+        ],
+        [
+          123.62400000000002,
+          64.944
+        ]
+      ]
+    },
+    {
+      "title": "",
+      "heading_level": null,
+      "page_id": 7,
+      "polygon": [
+        [
+          141.984,
+          134.64000000000001
+        ],
+        [
+          201.348,
+          134.64000000000001
+        ],
+        [
+          201.348,
+          146.51999999999998
+        ],
+        [
+          141.984,
+          146.51999999999998
+        ]
+      ]
+    }
+  ],
+  "page_stats": [
+    {
+      "page_id": 0,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          328
+        ],
+        [
+          "Line",
+          97
+        ],
+        [
+          "Text",
+          10
+        ],
+        [
+          "SectionHeader",
+          4
+        ],
+        [
+          "PageFooter",
+          2
+        ],
+        [
+          "PageHeader",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 1,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          554
+        ],
+        [
+          "Line",
+          116
+        ],
+        [
+          "Text",
+          10
+        ],
+        [
+          "SectionHeader",
+          2
+        ],
+        [
+          "Diagram",
+          1
+        ],
+        [
+          "Caption",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 2,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          759
+        ],
+        [
+          "Line",
+          116
+        ],
+        [
+          "Text",
+          32
+        ],
+        [
+          "ListItem",
+          6
+        ],
+        [
+          "SectionHeader",
+          2
+        ],
+        [
+          "ListGroup",
+          1
+        ],
+        [
+          "Caption",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 3,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          269
+        ],
+        [
+          "Line",
+          107
+        ],
+        [
+          "Text",
+          26
+        ],
+        [
+          "ListItem",
+          5
+        ],
+        [
+          "SectionHeader",
+          2
+        ],
+        [
+          "Table",
+          1
+        ],
+        [
+          "Caption",
+          1
+        ],
+        [
+          "ListGroup",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 4,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          958
+        ],
+        [
+          "Line",
+          297
+        ],
+        [
+          "Text",
+          4
+        ],
+        [
+          "Figure",
+          1
+        ],
+        [
+          "Caption",
+          1
+        ],
+        [
+          "ListGroup",
+          1
+        ],
+        [
+          "Footnote",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ],
+        [
+          "FigureGroup",
+          1
+        ],
+        [
+          "ListItem",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 5,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          368
+        ],
+        [
+          "Line",
+          129
+        ],
+        [
+          "Text",
+          10
+        ],
+        [
+          "SectionHeader",
+          5
+        ],
+        [
+          "Figure",
+          2
+        ],
+        [
+          "Caption",
+          2
+        ],
+        [
+          "FigureGroup",
+          2
+        ],
+        [
+          "ListItem",
+          2
+        ],
+        [
+          "ListGroup",
+          1
+        ],
+        [
+          "Footnote",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 6,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          316
+        ],
+        [
+          "Line",
+          134
+        ],
+        [
+          "Text",
+          12
+        ],
+        [
+          "SectionHeader",
+          2
+        ],
+        [
+          "Figure",
+          1
+        ],
+        [
+          "Caption",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ],
+        [
+          "FigureGroup",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 7,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          264
+        ],
+        [
+          "Line",
+          104
+        ],
+        [
+          "SectionHeader",
+          2
+        ],
+        [
+          "Text",
+          2
+        ],
+        [
+          "ListGroup",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    }
+  ],
+  "debug_data_path": "debug_data/LaCAM Search-Based Algorithm for Quick Multi-Agent Pathfinding"
+}
