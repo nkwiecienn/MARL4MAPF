@@ -121,3 +121,40 @@ def test_vehicle_without_orders_rejected():
 
     with pytest.raises(ValueError, match="no orders"):
         _make(orders={"a": [(0, 2)], "b": []})
+
+
+def test_legacy_depots_kwarg_still_works():
+    env = _make()
+    assert env.depots == DEPOTS
+    assert env.depot_zones == {"a": [(0, 0)], "b": [(2, 4)]}
+    assert env.vehicle_depot_zone == {"a": "a", "b": "b"}
+
+
+def test_zone_kwargs_build_valid_env():
+    env = _make(
+        depots=None,
+        depot_zones={"shared": [(0, 0), (0, 2), (0, 4)]},
+        vehicle_depot_zone={"a": "shared", "b": "shared"},
+    )
+    assert env.depots["a"] != env.depots["b"]
+    assert set(env.depots.values()) <= {(0, 0), (0, 2), (0, 4)}
+    assert env.depot_zones == {"shared": [(0, 0), (0, 2), (0, 4)]}
+    assert env.vehicle_depot_zone == {"a": "shared", "b": "shared"}
+
+
+def test_shared_zone_capacity_error_surfaces_from_constructor():
+    import pytest
+
+    with pytest.raises(ValueError, match="capacity"):
+        _make(
+            depots=None,
+            depot_zones={"shared": [(0, 0)]},
+            vehicle_depot_zone={"a": "shared", "b": "shared"},
+        )
+
+
+def test_conflicting_depot_kwargs_rejected():
+    import pytest
+
+    with pytest.raises(ValueError, match="not both"):
+        _make(depot_zones={"shared": [(0, 0)]}, vehicle_depot_zone={"a": "shared"})

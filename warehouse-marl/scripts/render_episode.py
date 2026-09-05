@@ -16,10 +16,9 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT / "src"))
 
-from pogema import AnimationMonitor  # noqa: E402
-
 from warehouse_marl.env import build_env, load_config  # noqa: E402
 from warehouse_marl.training.evaluate import _astar_step  # noqa: E402
+from warehouse_marl.viz.renderer import WarehouseAnimationMonitor  # noqa: E402
 
 
 def main() -> None:
@@ -32,9 +31,9 @@ def main() -> None:
     config = load_config(args.config)
     env = build_env(config, repo_root=str(REPO_ROOT))
 
-    # AnimationMonitor wraps POGEMA's own env, which sits underneath our
-    # PettingZoo-facing wrapper -- so attach it to the inner env.
-    env._env.pogema = AnimationMonitor(env._env.pogema)
+    # WarehouseAnimationMonitor wraps POGEMA's own env, which sits underneath
+    # our PettingZoo-facing wrapper -- so attach it to the inner env.
+    env._env.pogema = WarehouseAnimationMonitor(env._env.pogema, warehouse_env=env)
 
     model = None
     if args.model:
@@ -49,6 +48,13 @@ def main() -> None:
 
     obs, _ = env.reset()
     obstacles = env._env.pogema.get_obstacles(ignore_borders=True).astype(bool)
+
+    # Step-0 entry: state right after reset, before any action. Required
+    # because POGEMA's recorded history has one entry per step starting at
+    # step 0 (reset), but goal_hits only changes inside the loop below --
+    # without this the whole goal-hits history would be off by one frame
+    # relative to that recorded history.
+    goal_hits_log = [dict(env._goal_hits)]
 
     for _ in range(config.get("max_episode_steps", 256)):
         if model is not None:
@@ -65,11 +71,12 @@ def main() -> None:
             }
 
         obs, _, terminated, truncated, infos = env.step(actions)
+        goal_hits_log.append(dict(env._goal_hits))
         if all(terminated.values()) or all(truncated.values()):
             print(f"episode ended: solved={infos[env.possible_agents[0]].get('episode_solved')}")
             break
 
-    env._env.pogema.save_animation(args.out)
+    env._env.pogema.save_animation(args.out, goal_hits_log=goal_hits_log)
     print(f"saved animation to {args.out}")
 
 

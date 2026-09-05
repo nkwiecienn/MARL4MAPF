@@ -15,13 +15,10 @@ def load_config(path: str) -> Dict[str, Any]:
 
 def build_env(config: Dict[str, Any], repo_root: str = ".", **overrides) -> WarehouseEnv:
     grid_map = (Path(repo_root) / config["map_path"]).read_text()
-
-    depots = {k: tuple(v) for k, v in config["depots"].items()}
     orders = {k: [tuple(node) for node in v] for k, v in config["orders"].items()}
 
-    kwargs = dict(
+    kwargs: Dict[str, Any] = dict(
         grid_map=grid_map,
-        depots=depots,
         orders=orders,
         order_strategy=config.get("order_strategy", "nearest"),
         obs_radius=config.get("obs_radius", 5),
@@ -32,5 +29,14 @@ def build_env(config: Dict[str, Any], repo_root: str = ".", **overrides) -> Ware
         completion_bonus=config.get("completion_bonus", 5.0),
         seed=config.get("seed"),
     )
+
+    if "depot_zones" in config:
+        kwargs["depot_zones"] = {
+            zid: [tuple(c) for c in cells] for zid, cells in config["depot_zones"].items()
+        }
+        kwargs["vehicle_depot_zone"] = dict(config["vehicle_depot_zone"])
+    else:
+        kwargs["depots"] = {k: tuple(v) for k, v in config["depots"].items()}
+
     kwargs.update(overrides)
     return WarehouseEnv(**kwargs)

@@ -12,6 +12,7 @@
 import warnings
 from typing import Dict, List, Optional, Sequence
 
+from warehouse_marl.env.depots import allocate_depot_cells
 from warehouse_marl.env.routing import Coord, build_sequence
 
 
@@ -22,8 +23,10 @@ class WarehouseEnv:
     def __init__(
         self,
         grid_map: str,
-        depots: Dict[str, Coord],
         orders: Dict[str, Sequence[Coord]],
+        depots: Optional[Dict[str, Coord]] = None,
+        depot_zones: Optional[Dict[str, Sequence[Coord]]] = None,
+        vehicle_depot_zone: Optional[Dict[str, str]] = None,
         order_strategy: str = "nearest",
         obs_radius: int = 5,
         collision_system: str = "soft",
@@ -39,11 +42,22 @@ class WarehouseEnv:
         ----------
         grid_map:
             POGEMA ASCII map: '.' free, '#' obstacle, one row per line.
-        depots:
-            vehicle_id -> (row, col) start and return position.
         orders:
             vehicle_id -> list of (row, col) nodes that vehicle must visit.
-            Every vehicle in `depots` needs at least one order.
+            Every vehicle needs at least one order.
+        depots:
+            vehicle_id -> (row, col) start and return position. Mutually
+            exclusive with `depot_zones`/`vehicle_depot_zone`; equivalent to
+            giving each vehicle its own private single-cell zone.
+        depot_zones:
+            zone_id -> list of (row, col) free cells making up that zone.
+            Zones may be shared: multiple vehicles may point at the same
+            zone_id (via `vehicle_depot_zone`), each getting a distinct
+            concrete cell from it, allocated once, deterministically, at
+            construction time. Must be given together with
+            `vehicle_depot_zone`.
+        vehicle_depot_zone:
+            vehicle_id -> zone_id. Must be given together with `depot_zones`.
         order_strategy:
             "nearest" (greedy nearest-neighbour tour) or "as_given".
         collision_system:
@@ -59,12 +73,36 @@ class WarehouseEnv:
         """
         from pogema import GridConfig, pogema_v0
 
-        self.vehicle_ids: List[str] = list(depots.keys())
+        zone_given = depot_zones is not None or vehicle_depot_zone is not None
+        if depots is not None and zone_given:
+            raise ValueError("pass either `depots` or (`depot_zones` + `vehicle_depot_zone`), not both")
+        if depots is None and not zone_given:
+            raise ValueError("must pass `depots` or both `depot_zones` and `vehicle_depot_zone`")
+        if zone_given and (depot_zones is None or vehicle_depot_zone is None):
+            raise ValueError("`depot_zones` and `vehicle_depot_zone` must be given together")
+
+        if depots is not None:
+            # Legacy path: each vehicle's fixed cell IS its own private singleton zone.
+            self.vehicle_ids: List[str] = list(depots.keys())
+            self.depot_zones: Dict[str, List[Coord]] = {v: [tuple(depots[v])] for v in self.vehicle_ids}
+            self.vehicle_depot_zone: Dict[str, str] = {v: v for v in self.vehicle_ids}
+        else:
+            self.vehicle_ids = list(vehicle_depot_zone.keys())
+            self.depot_zones = {zid: [tuple(c) for c in cells] for zid, cells in depot_zones.items()}
+            self.vehicle_depot_zone = dict(vehicle_depot_zone)
+
         missing = [v for v in self.vehicle_ids if not orders.get(v)]
         if missing:
             raise ValueError(f"vehicles with no orders: {missing}")
 
-        self.depots = {v: tuple(depots[v]) for v in self.vehicle_ids}
+        self.depots = allocate_depot_cells(
+            grid_map=grid_map,
+            depot_zones=self.depot_zones,
+            vehicle_depot_zone=self.vehicle_depot_zone,
+            seed=seed,
+        )
+        self.vehicle_depot_cell = self.depots  # explicit alias, used by the renderer
+
         self.sequences: Dict[str, List[List[int]]] = {
             v: build_sequence(self.depots[v], orders[v], order_strategy) for v in self.vehicle_ids
         }
