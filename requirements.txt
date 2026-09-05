@@ -1,0 +1,14 @@
+# Version pins matter here. pogema 1.4.0 requires gymnasium==0.28.1 EXACTLY,
+# which rules out supersuit>=3.11 (needs gymnasium>=1.0) and SB3>=2.4
+# (needs gymnasium>=0.29). SB3 2.3.2 is the newest release that still works
+# with gymnasium 0.28.1, which is why it is pinned rather than left open.
+pogema==1.4.0
+gymnasium==0.28.1
+stable-baselines3==2.3.2
+torch>=2.0
+numpy>=1.24,<2
+PyYAML>=6.0
+
+# optional
+# tensorboard>=2.14   # enables training curves in scripts/train.py
+# pytest>=7.0         # to run tests/
