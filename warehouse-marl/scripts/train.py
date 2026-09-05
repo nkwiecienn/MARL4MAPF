@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-"""Train a shared PPO policy (parameter-shared IPPO) with Stable-Baselines3.
-
-Usage:
-    python scripts/train.py
-    python scripts/train.py --timesteps 500000
-"""
-
 import argparse
 import sys
 from pathlib import Path
@@ -15,12 +7,12 @@ import yaml
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT / "src"))
 
-from stable_baselines3 import PPO  # noqa: E402
-from stable_baselines3.common.callbacks import CheckpointCallback  # noqa: E402
+from stable_baselines3 import PPO
+from stable_baselines3.common.callbacks import CheckpointCallback
 
-from warehouse_marl.env import build_env, load_config  # noqa: E402
-from warehouse_marl.training.evaluate import astar_baseline, evaluate_policy  # noqa: E402
-from warehouse_marl.training.sb3_vec_env import WarehouseVecEnv  # noqa: E402
+from warehouse_marl.env import build_env, load_config
+from warehouse_marl.training.evaluate import evaluate_policy
+from warehouse_marl.training.sb3_vec_env import WarehouseVecEnv
 
 
 def main() -> None:
@@ -37,16 +29,6 @@ def main() -> None:
 
     train_env = WarehouseVecEnv(build_env(env_config, repo_root=str(REPO_ROOT)))
 
-    # tensorboard is optional -- only enable logging if it is actually installed,
-    # otherwise SB3 raises ImportError at learn() time.
-    try:
-        import tensorboard  # noqa: F401
-
-        tb_log = str(REPO_ROOT / cfg["log_dir"])
-    except ImportError:
-        tb_log = None
-        print("(tensorboard not installed -- skipping tensorboard logging)")
-
     model = PPO(
         cfg["policy"],
         train_env,
@@ -61,7 +43,7 @@ def main() -> None:
         vf_coef=cfg["vf_coef"],
         max_grad_norm=cfg["max_grad_norm"],
         seed=cfg["seed"],
-        tensorboard_log=tb_log,
+        tensorboard_log=None,
         verbose=1,
     )
 
@@ -72,16 +54,6 @@ def main() -> None:
         save_path=str(checkpoint_dir),
         name_prefix="ppo_warehouse",
     )
-
-    print("=== baseline before training ===")
-    baseline = astar_baseline(build_env(env_config, repo_root=str(REPO_ROOT)), n_episodes=cfg["eval_episodes"])
-    print(f"A* (collision-blind): solve_rate={baseline['solve_rate']:.0%} "
-          f"mean_steps={baseline['mean_steps_when_solved']}")
-
-    untrained = evaluate_policy(model, build_env(env_config, repo_root=str(REPO_ROOT)),
-                                n_episodes=cfg["eval_episodes"])
-    print(f"untrained PPO:        solve_rate={untrained['solve_rate']:.0%} "
-          f"mean_steps={untrained['mean_steps_when_solved']}")
 
     model.learn(total_timesteps=total_timesteps, callback=callback)
 

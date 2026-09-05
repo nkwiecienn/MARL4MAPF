@@ -1,79 +1,48 @@
-#!/usr/bin/env python3
-"""Render an episode to an SVG animation you can open in a browser.
-
-Uses a trained PPO model if you point at one, otherwise the collision-blind
-A* baseline, so you can eyeball the difference in how they handle congestion.
-
-Usage:
-    python scripts/render_episode.py
-    python scripts/render_episode.py --model checkpoints/ppo_warehouse_final.zip
-"""
-
 import argparse
 import sys
 from pathlib import Path
 
+import numpy as np
+from stable_baselines3 import PPO
+
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT / "src"))
 
-from warehouse_marl.env import build_env, load_config  # noqa: E402
-from warehouse_marl.training.evaluate import _astar_step  # noqa: E402
-from warehouse_marl.viz.renderer import WarehouseAnimationMonitor  # noqa: E402
+from warehouse_marl.env import build_env, load_config
+from warehouse_marl.viz.renderer import WarehouseAnimationMonitor
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", default=str(REPO_ROOT / "configs" / "env.yaml"))
-    parser.add_argument("--model", default=None, help="path to a saved SB3 model (.zip)")
+    parser.add_argument("--model", required=True, help="path to a saved SB3 model (.zip)")
     parser.add_argument("--out", default=str(REPO_ROOT / "episode.svg"))
     args = parser.parse_args()
 
     config = load_config(args.config)
     env = build_env(config, repo_root=str(REPO_ROOT))
-
-    # WarehouseAnimationMonitor wraps POGEMA's own env, which sits underneath
-    # our PettingZoo-facing wrapper -- so attach it to the inner env.
     env._env.pogema = WarehouseAnimationMonitor(env._env.pogema, warehouse_env=env)
+    model = PPO.load(args.model)
 
-    model = None
-    if args.model:
-        from stable_baselines3 import PPO
-
-        model = PPO.load(args.model)
-        print(f"using policy from {args.model}")
-    else:
-        print("no --model given; using the collision-blind A* baseline")
-
-    import numpy as np
-
+    vehicles = env.possible_agents
     obs, _ = env.reset()
-    obstacles = env._env.pogema.get_obstacles(ignore_borders=True).astype(bool)
-
-    # Step-0 entry: state right after reset, before any action. Required
-    # because POGEMA's recorded history has one entry per step starting at
-    # step 0 (reset), but goal_hits only changes inside the loop below --
-    # without this the whole goal-hits history would be off by one frame
-    # relative to that recorded history.
     goal_hits_log = [dict(env._goal_hits)]
 
     for _ in range(config.get("max_episode_steps", 256)):
-        if model is not None:
-            stacked = np.stack([obs[v] for v in env.possible_agents]).astype(np.float32)
-            raw_actions, _ = model.predict(stacked, deterministic=True)
-            actions = {v: int(raw_actions[i]) for i, v in enumerate(env.possible_agents)}
-        else:
-            pogema = env._env.pogema
-            positions = pogema.get_agents_xy(ignore_borders=True)
-            targets = pogema.get_targets_xy(ignore_borders=True)
-            actions = {
-                v: _astar_step(tuple(positions[i]), tuple(targets[i]), obstacles)
-                for i, v in enumerate(env.possible_agents)
-            }
+        obs_batch = np.stack([obs[v] for v in vehicles]).astype(np.float32)
+        action_batch, _ = model.predict(obs_batch, deterministic=True)
+
+        actions = {}
+        for vehicle, action in zip(vehicles, action_batch):
+            actions[vehicle] = int(action)
 
         obs, _, terminated, truncated, infos = env.step(actions)
         goal_hits_log.append(dict(env._goal_hits))
-        if all(terminated.values()) or all(truncated.values()):
-            print(f"episode ended: solved={infos[env.possible_agents[0]].get('episode_solved')}")
+
+        episode_over = all(terminated.values()) or all(truncated.values())
+        if episode_over:
+            solved = infos[vehicles[0]].get("episode_solved")
+            print(f"episode ended: solved={solved}")
             break
 
     env._env.pogema.save_animation(args.out, goal_hits_log=goal_hits_log)

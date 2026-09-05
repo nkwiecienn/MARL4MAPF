@@ -1,20 +1,3 @@
-"""Project-owned SVG renderer for WarehouseEnv episodes.
-
-Extends the *installed* pogema 1.4.0 SVG animation classes
-(`pogema.svg_animation.animation_wrapper.AnimationMonitor` and
-`pogema.svg_animation.animation_drawer.AnimationDrawer`) to also draw:
-
-* each vehicle's depot cell as a filled square in that vehicle's color, and
-* every node in each vehicle's tour, all the time, as one of three shapes
-  in that vehicle's color: a small dot (visited), a hollow ring (next),
-  or a hollow diamond (remaining) -- distinguished by shape, never by
-  fading opacity.
-
-The vendored pogema copy at the repo root (a newer 2.0.0a pre-release kept
-purely for reference) is never imported here -- everything comes from the
-`pogema` package actually installed in the environment.
-"""
-
 from dataclasses import dataclass
 from itertools import cycle
 from typing import Dict, List, Optional, Tuple
@@ -41,13 +24,6 @@ def _pad_to(values: List[int], length: int) -> List[int]:
 
 
 def _diamond_points(cx: float, cy: float, half_diagonal: float) -> str:
-    """SVG `points` string for a diamond centered on (cx, cy).
-
-    cx/cy here are the same *positive*-space values used everywhere else
-    in this file. Circle/Rectangle negate y internally per shape; a
-    polygon has no such built-in, so each vertex's y is negated here, by
-    hand, the same way.
-    """
     pts = [
         (cx, cy - half_diagonal),
         (cx + half_diagonal, cy),
@@ -74,17 +50,6 @@ class WarehouseGridHolder(GridHolder):
 
 
 class WarehouseAnimationMonitor(AnimationMonitor):
-    """`AnimationMonitor` that also threads depot-cell/full-tour data through.
-
-    Only `save_animation` is overridden -- `__init__`/`step`/`reset`/
-    `pick_name` are inherited unchanged. `save_animation`'s body is a
-    copy-adapted version of `AnimationMonitor.save_animation`: that method
-    hardcodes `GridHolder(...)`/`AnimationDrawer()` construction inline
-    with no seam to override, so duplicating it (rather than the whole
-    class hierarchy) is the smallest available diff. `pogema` is pinned to
-    exactly 1.4.0 in requirements.txt/pyproject.toml, so this won't
-    silently drift out of sync with the base method.
-    """
 
     def __init__(self, env, warehouse_env, animation_config: AnimationConfig = AnimationConfig()):
         super().__init__(env, animation_config)
@@ -105,14 +70,6 @@ class WarehouseAnimationMonitor(AnimationMonitor):
             obstacles = self.env.get_obstacles(ignore_borders=False)
         history = self.env.decompress_history(self.history)
 
-        # AnimationMonitor crops the obstacle border down to working_radius =
-        # obs_radius - 1, not obs_radius -- i.e. it deliberately leaves one
-        # ring of boundary wall visible, and shifts every recorded agent/
-        # target position by +1 (via PersistentWrapper's xy_offset) to match.
-        # WarehouseEnv's own coordinates (vehicle_depot_cell, sequences) are
-        # in the *unshifted* "true"/ignore_borders=True system, so they need
-        # the same +1 applied here to land on the cells vehicles actually
-        # walk to (verified empirically: true (4, 0) records as (5, 1)).
         border_offset = self.grid_config.obs_radius - wr
         vehicle_depot_cell = {
             v: (row + border_offset, col + border_offset) for v, (row, col) in self._vehicle_depot_cell.items()
@@ -122,7 +79,7 @@ class WarehouseAnimationMonitor(AnimationMonitor):
             for v, seq in self._sequences.items()
         }
 
-        svg_settings = SvgSettings(time_scale=0.5)  # default 0.25 read as too fast
+        svg_settings = SvgSettings(time_scale=0.5)
         colors_cycle = cycle(svg_settings.colors)
         agents_colors = {index: next(colors_cycle) for index in range(self.grid_config.num_agents)}
 
@@ -164,28 +121,6 @@ class WarehouseAnimationMonitor(AnimationMonitor):
 
 
 class WarehouseAnimationDrawer(AnimationDrawer):
-    """Draws a colored depot square per vehicle plus its full tour as shapes.
-
-    Coordinate convention (verified against the installed animation_drawer.py
-    / svg_objects.py, do not deviate from it): for a grid coordinate
-    (row, col), the SVG *center* point is
-
-        cx = draw_start + col * scale_size
-        cy = draw_start + (width - row - 1) * scale_size
-
-    exactly as `create_agents`/`create_field_of_view` already compute it.
-    `Circle`/`Rectangle` negate cy/y internally at construction, so callers
-    always pass this positive-space value (see `Diamond`/`_diamond_points`
-    above for the same convention applied by hand). `fix_point()` is the
-    *reverse* mapping (SVG loop index -> grid index), used only by
-    `create_obstacles` for its obstacle-array lookup -- never for placement.
-
-    Every tour waypoint is drawn as three superimposed, persistent shapes
-    (visited dot / next ring / remaining diamond); only one is ever visible
-    at a time, toggled by a hard 0/1 opacity animation -- there is no path
-    morphing in SMIL, so "the shape changes over time" has to mean "three
-    shapes exist, and visibility swaps between them."
-    """
 
     def create_targets(self, grid_holder):
         gh: WarehouseGridHolder = grid_holder
@@ -260,11 +195,5 @@ class WarehouseAnimationDrawer(AnimationDrawer):
 
     def create_animation(self, grid_holder):
         drawing = super().create_animation(grid_holder)
-        # Insert at the FRONT of the element list, not append -- these are
-        # solid filled squares, and super().create_animation() already
-        # added agents/targets to `drawing`. Appending would paint the
-        # squares LAST (on top), burying every waypoint shape and any
-        # agent parked in its depot cell under solid color. Inserting at
-        # index 0 paints them first/underneath everything.
         drawing.elements[0:0] = self.create_depot_markers(grid_holder)
         return drawing

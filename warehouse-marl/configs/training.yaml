@@ -1,9 +1,6 @@
-# Hyperparameters for scripts/train.py (Stable-Baselines3 PPO,
-# one shared policy across all vehicles = parameter-shared IPPO).
-
 total_timesteps: 400000
-policy: MlpPolicy      # try CnnPolicy later: observations are (3, H, W) grids
-n_steps: 256            # rollout length per vehicle before each update
+policy: MlpPolicy
+n_steps: 256
 batch_size: 256
 n_epochs: 10
 gamma: 0.99

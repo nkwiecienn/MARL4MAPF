@@ -1,32 +1,19 @@
-"""Episodic multi-vehicle warehouse pathfinding on top of POGEMA.
-
-* Each vehicle has its own depot -- they need not share one.
-* Each vehicle has a *fixed, predefined* set of order nodes to visit.
-  Nothing new arrives during an episode.
-* A vehicle is finished once it has visited all its orders **and**
-  returned to its depot.
-* The episode ends when every vehicle is finished (or on timeout).
-* Collisions between vehicles are handled by POGEMA.
-"""
-
 import warnings
 from typing import Dict, List, Optional, Sequence
-
 from warehouse_marl.env.depots import allocate_depot_cells
 from warehouse_marl.env.routing import Coord, build_sequence
+from pogema import GridConfig, pogema_v0
 
 
 class WarehouseEnv:
-    # Queried by SB3's VecEnv wrapper via get_attr("render_mode").
     render_mode = None
 
     def __init__(
         self,
         grid_map: str,
         orders: Dict[str, Sequence[Coord]],
-        depots: Optional[Dict[str, Coord]] = None,
-        depot_zones: Optional[Dict[str, Sequence[Coord]]] = None,
-        vehicle_depot_zone: Optional[Dict[str, str]] = None,
+        depot_zones: Dict[str, Sequence[Coord]],
+        vehicle_depot_zone: Dict[str, str],
         order_strategy: str = "nearest",
         obs_radius: int = 5,
         collision_system: str = "soft",
@@ -37,71 +24,16 @@ class WarehouseEnv:
         seed: Optional[int] = None,
         **grid_kwargs,
     ) -> None:
-        """
-        Parameters
-        ----------
-        grid_map:
-            POGEMA ASCII map: '.' free, '#' obstacle, one row per line.
-        orders:
-            vehicle_id -> list of (row, col) nodes that vehicle must visit.
-            Every vehicle needs at least one order.
-        depots:
-            vehicle_id -> (row, col) start and return position. Mutually
-            exclusive with `depot_zones`/`vehicle_depot_zone`; equivalent to
-            giving each vehicle its own private single-cell zone.
-        depot_zones:
-            zone_id -> list of (row, col) free cells making up that zone.
-            Zones may be shared: multiple vehicles may point at the same
-            zone_id (via `vehicle_depot_zone`), each getting a distinct
-            concrete cell from it, allocated once, deterministically, at
-            construction time. Must be given together with
-            `vehicle_depot_zone`.
-        vehicle_depot_zone:
-            vehicle_id -> zone_id. Must be given together with `depot_zones`.
-        order_strategy:
-            "nearest" (greedy nearest-neighbour tour) or "as_given".
-        collision_system:
-            "soft" (POGEMA's own LMAPF experiment setting) or "priority"
-            (POGEMA's default).
-        goal_reward:
-            Awarded each time a vehicle reaches its current target node.
-        step_penalty:
-            Subtracted each step from vehicles that are not yet finished,
-            so shorter tours score higher. Set to 0 to disable.
-        completion_bonus:
-            One-off reward when a vehicle completes its tour and is home.
-        """
-        from pogema import GridConfig, pogema_v0
-
-        zone_given = depot_zones is not None or vehicle_depot_zone is not None
-        if depots is not None and zone_given:
-            raise ValueError("pass either `depots` or (`depot_zones` + `vehicle_depot_zone`), not both")
-        if depots is None and not zone_given:
-            raise ValueError("must pass `depots` or both `depot_zones` and `vehicle_depot_zone`")
-        if zone_given and (depot_zones is None or vehicle_depot_zone is None):
-            raise ValueError("`depot_zones` and `vehicle_depot_zone` must be given together")
-
-        if depots is not None:
-            # Legacy path: each vehicle's fixed cell IS its own private singleton zone.
-            self.vehicle_ids: List[str] = list(depots.keys())
-            self.depot_zones: Dict[str, List[Coord]] = {v: [tuple(depots[v])] for v in self.vehicle_ids}
-            self.vehicle_depot_zone: Dict[str, str] = {v: v for v in self.vehicle_ids}
-        else:
-            self.vehicle_ids = list(vehicle_depot_zone.keys())
-            self.depot_zones = {zid: [tuple(c) for c in cells] for zid, cells in depot_zones.items()}
-            self.vehicle_depot_zone = dict(vehicle_depot_zone)
-
-        missing = [v for v in self.vehicle_ids if not orders.get(v)]
-        if missing:
-            raise ValueError(f"vehicles with no orders: {missing}")
+        self.vehicle_ids: List[str] = list(vehicle_depot_zone.keys())
+        self.depot_zones = {zid: [tuple(c) for c in cells] for zid, cells in depot_zones.items()}
+        self.vehicle_depot_zone = dict(vehicle_depot_zone)
 
         self.depots = allocate_depot_cells(
-            grid_map=grid_map,
             depot_zones=self.depot_zones,
             vehicle_depot_zone=self.vehicle_depot_zone,
             seed=seed,
         )
-        self.vehicle_depot_cell = self.depots  # explicit alias, used by the renderer
+        self.vehicle_depot_cell = self.depots
 
         self.sequences: Dict[str, List[List[int]]] = {
             v: build_sequence(self.depots[v], orders[v], order_strategy) for v in self.vehicle_ids
@@ -133,8 +65,6 @@ class WarehouseEnv:
         self._finished: Dict[str, bool] = {}
         self._steps = 0
 
-    # -- spaces ---------------------------------------------------------------
-
     @property
     def possible_agents(self) -> List[str]:
         return list(self.vehicle_ids)
@@ -153,8 +83,6 @@ class WarehouseEnv:
         """Number of goals (orders + depot return) this vehicle must complete."""
         return len(self.sequences[vehicle_id])
 
-    # -- core loop ------------------------------------------------------------
-
     def reset(self, seed: Optional[int] = None, options=None):
         obs, info = self._env.reset(seed=seed, options=options)
         self._goal_hits = {v: 0 for v in self.vehicle_ids}
@@ -163,16 +91,11 @@ class WarehouseEnv:
         return self._remap(obs), self._remap(info)
 
     def step(self, actions: Dict[str, int]):
-        # Finished vehicles are frozen in place at their depot. They still
-        # occupy a cell (so they can still block others, as a real parked
-        # vehicle would), but they no longer act or score.
         pz_actions = {
             self._vehicle_to_player[v]: (0 if self._finished[v] else int(actions.get(v, 0)))
             for v in self.vehicle_ids
         }
 
-        # POGEMA warns every time a goal sequence wraps. We deliberately let
-        # it wrap and handle termination ourselves, so the warning is noise.
         with warnings.catch_warnings():
             warnings.filterwarnings("ignore", message=".*cycling back to the beginning.*")
             obs, raw_rewards, _, pz_truncated, infos = self._env.step(pz_actions)
@@ -190,7 +113,7 @@ class WarehouseEnv:
                 continue
 
             reward = -self.step_penalty
-            if raw_rewards[v] > 0:  # POGEMA gives 1.0 on reaching the current goal
+            if raw_rewards[v] > 0:
                 self._goal_hits[v] += 1
                 reward += self.goal_reward
                 if self._goal_hits[v] >= len(self.sequences[v]):
@@ -201,9 +124,6 @@ class WarehouseEnv:
         episode_over = all(self._finished.values())
         timed_out = bool(pz_truncated) and all(pz_truncated.values())
 
-        # A single, shared episode boundary for every vehicle. Vehicles that
-        # finish early are frozen rather than removed, which keeps all agents
-        # in lockstep -- much easier to batch for a shared-policy learner.
         terminated = {v: episode_over for v in self.vehicle_ids}
         truncated = {v: (timed_out and not episode_over) for v in self.vehicle_ids}
 
@@ -228,4 +148,4 @@ class WarehouseEnv:
         self._env.close()
 
     def _remap(self, d: dict) -> dict:
-        return {self._player_to_vehicle[k]: v for k, v in d.items() if k in self._player_to_vehicle}
+        return {self._player_to_vehicle[k]: v for k, v in d.items()}
