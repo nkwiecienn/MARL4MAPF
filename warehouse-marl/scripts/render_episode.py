@@ -21,31 +21,27 @@ def main() -> None:
 
     config = load_config(args.config)
     env = build_env(config, repo_root=str(REPO_ROOT))
-    env._env.pogema = WarehouseAnimationMonitor(env._env.pogema, warehouse_env=env)
+    monitor = WarehouseAnimationMonitor(env._env.pogema, warehouse_env=env)
+    env._env.pogema = monitor
     model = PPO.load(args.model)
 
     vehicles = env.possible_agents
     obs, _ = env.reset()
-    goal_hits_log = [dict(env._goal_hits)]
+    goal_hits_log = [env.goal_hits]
 
     for _ in range(config.get("max_episode_steps", 256)):
-        obs_batch = np.stack([obs[v] for v in vehicles]).astype(np.float32)
-        action_batch, _ = model.predict(obs_batch, deterministic=True)
-
-        actions = {}
-        for vehicle, action in zip(vehicles, action_batch):
-            actions[vehicle] = int(action)
+        observations = np.stack([obs[vehicle] for vehicle in vehicles]).astype(np.float32)
+        predicted, _ = model.predict(observations, deterministic=True)
+        actions = {vehicle: int(action) for vehicle, action in zip(vehicles, predicted)}
 
         obs, _, terminated, truncated, infos = env.step(actions)
-        goal_hits_log.append(dict(env._goal_hits))
+        goal_hits_log.append(env.goal_hits)
 
-        episode_over = all(terminated.values()) or all(truncated.values())
-        if episode_over:
-            solved = infos[vehicles[0]].get("episode_solved")
-            print(f"episode ended: solved={solved}")
+        if all(terminated.values()) or all(truncated.values()):
+            print(f"episode ended: solved={infos[vehicles[0]].get('episode_solved')}")
             break
 
-    env._env.pogema.save_animation(args.out, goal_hits_log=goal_hits_log)
+    monitor.save_animation(args.out, goal_hits_log=goal_hits_log)
     print(f"saved animation to {args.out}")
 
 

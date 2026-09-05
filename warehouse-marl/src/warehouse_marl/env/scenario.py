@@ -1,22 +1,21 @@
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any
+
 import yaml
+
 from warehouse_marl.env.warehouse_env import WarehouseEnv
 
 
-def load_config(path: str) -> Dict[str, Any]:
+def load_config(path: str) -> dict[str, Any]:
     with open(path) as f:
         return yaml.safe_load(f)
 
 
-def build_env(config: Dict[str, Any], repo_root: str = ".", **overrides) -> WarehouseEnv:
-    grid_map = (Path(repo_root) / config["map_path"]).read_text()
-    orders = {k: [tuple(node) for node in v] for k, v in config["orders"].items()}
-
-    kwargs: Dict[str, Any] = dict(
-        grid_map=grid_map,
-        orders=orders,
-        depot_zones={zid: [tuple(c) for c in cells] for zid, cells in config["depot_zones"].items()},
+def build_env(config: dict[str, Any], repo_root: str = ".", **overrides) -> WarehouseEnv:
+    settings: dict[str, Any] = dict(
+        grid_map=(Path(repo_root) / config["map_path"]).read_text(),
+        orders={vehicle: [tuple(node) for node in nodes] for vehicle, nodes in config["orders"].items()},
+        depot_zones={zone: [tuple(cell) for cell in cells] for zone, cells in config["depot_zones"].items()},
         vehicle_depot_zone=dict(config["vehicle_depot_zone"]),
         order_strategy=config.get("order_strategy", "nearest"),
         obs_radius=config.get("obs_radius", 5),
@@ -27,5 +26,5 @@ def build_env(config: Dict[str, Any], repo_root: str = ".", **overrides) -> Ware
         completion_bonus=config.get("completion_bonus", 5.0),
         seed=config.get("seed"),
     )
-    kwargs.update(overrides)
-    return WarehouseEnv(**kwargs)
+    settings.update(overrides)
+    return WarehouseEnv(**settings)

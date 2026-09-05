@@ -1,24 +1,25 @@
-from typing import Dict, List, Optional, Sequence, Tuple
+from typing import Optional, Sequence
+
 import numpy as np
 
-Coord = Tuple[int, int]
+Coord = tuple[int, int]
 
 
 def allocate_depot_cells(
-    depot_zones: Dict[str, Sequence[Coord]],
-    vehicle_depot_zone: Dict[str, str],
+    depot_zones: dict[str, Sequence[Coord]],
+    vehicle_depot_zone: dict[str, str],
     seed: Optional[int] = None,
-) -> Dict[str, Coord]:
-    zone_to_vehicles: Dict[str, List[str]] = {}
-    for v in sorted(vehicle_depot_zone):
-        zone_to_vehicles.setdefault(vehicle_depot_zone[v], []).append(v)
+) -> dict[str, Coord]:
+    vehicles_by_zone: dict[str, list[str]] = {}
+    for vehicle in sorted(vehicle_depot_zone):
+        zone = vehicle_depot_zone[vehicle]
+        vehicles_by_zone.setdefault(zone, []).append(vehicle)
 
     rng = np.random.default_rng(seed)
-    result: Dict[str, Coord] = {}
-    for zone_id in sorted(zone_to_vehicles):
-        vehicles = zone_to_vehicles[zone_id]
-        zone_cells = [tuple(c) for c in depot_zones[zone_id]]
-        order = rng.permutation(len(zone_cells))
-        for v, i in zip(vehicles, order):
-            result[v] = zone_cells[i]
-    return result
+    depots: dict[str, Coord] = {}
+    for zone, vehicles in sorted(vehicles_by_zone.items()):
+        cells = [tuple(cell) for cell in depot_zones[zone]]
+        shuffled = rng.permutation(len(cells))
+        for vehicle, index in zip(vehicles, shuffled):
+            depots[vehicle] = cells[index]
+    return depots

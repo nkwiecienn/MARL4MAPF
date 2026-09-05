@@ -1,8 +1,10 @@
 import warnings
-from typing import Dict, List, Optional, Sequence
+from typing import Optional, Sequence
+
+from pogema import GridConfig, pogema_v0
+
 from warehouse_marl.env.depots import allocate_depot_cells
 from warehouse_marl.env.routing import Coord, build_sequence
-from pogema import GridConfig, pogema_v0
 
 
 class WarehouseEnv:
@@ -11,9 +13,9 @@ class WarehouseEnv:
     def __init__(
         self,
         grid_map: str,
-        orders: Dict[str, Sequence[Coord]],
-        depot_zones: Dict[str, Sequence[Coord]],
-        vehicle_depot_zone: Dict[str, str],
+        orders: dict[str, Sequence[Coord]],
+        depot_zones: dict[str, Sequence[Coord]],
+        vehicle_depot_zone: dict[str, str],
         order_strategy: str = "nearest",
         obs_radius: int = 5,
         collision_system: str = "soft",
@@ -24,8 +26,8 @@ class WarehouseEnv:
         seed: Optional[int] = None,
         **grid_kwargs,
     ) -> None:
-        self.vehicle_ids: List[str] = list(vehicle_depot_zone.keys())
-        self.depot_zones = {zid: [tuple(c) for c in cells] for zid, cells in depot_zones.items()}
+        self.vehicle_ids = list(vehicle_depot_zone)
+        self.depot_zones = {zone: [tuple(cell) for cell in cells] for zone, cells in depot_zones.items()}
         self.vehicle_depot_zone = dict(vehicle_depot_zone)
 
         self.depots = allocate_depot_cells(
@@ -33,10 +35,9 @@ class WarehouseEnv:
             vehicle_depot_zone=self.vehicle_depot_zone,
             seed=seed,
         )
-        self.vehicle_depot_cell = self.depots
-
-        self.sequences: Dict[str, List[List[int]]] = {
-            v: build_sequence(self.depots[v], orders[v], order_strategy) for v in self.vehicle_ids
+        self.sequences = {
+            vehicle: build_sequence(self.depots[vehicle], orders[vehicle], order_strategy)
+            for vehicle in self.vehicle_ids
         }
 
         self.goal_reward = goal_reward
@@ -46,8 +47,8 @@ class WarehouseEnv:
         self.grid_config = GridConfig(
             map=grid_map,
             num_agents=len(self.vehicle_ids),
-            agents_xy=[self.depots[v] for v in self.vehicle_ids],
-            targets_xy=[self.sequences[v] for v in self.vehicle_ids],
+            agents_xy=[self.depots[vehicle] for vehicle in self.vehicle_ids],
+            targets_xy=[self.sequences[vehicle] for vehicle in self.vehicle_ids],
             on_target="restart",
             collision_system=collision_system,
             obs_radius=obs_radius,
@@ -58,26 +59,30 @@ class WarehouseEnv:
         )
         self._env = pogema_v0(grid_config=self.grid_config)
 
-        self._vehicle_to_player = {v: f"player_{i}" for i, v in enumerate(self.vehicle_ids)}
-        self._player_to_vehicle = {p: v for v, p in self._vehicle_to_player.items()}
+        self._player_of = {vehicle: f"player_{i}" for i, vehicle in enumerate(self.vehicle_ids)}
+        self._vehicle_of = {player: vehicle for vehicle, player in self._player_of.items()}
 
-        self._goal_hits: Dict[str, int] = {}
-        self._finished: Dict[str, bool] = {}
+        self._goal_hits: dict[str, int] = {}
+        self._finished: dict[str, bool] = {}
         self._steps = 0
 
     @property
-    def possible_agents(self) -> List[str]:
+    def possible_agents(self) -> list[str]:
         return list(self.vehicle_ids)
 
     @property
-    def agents(self) -> List[str]:
+    def agents(self) -> list[str]:
         return list(self.vehicle_ids)
 
+    @property
+    def goal_hits(self) -> dict[str, int]:
+        return dict(self._goal_hits)
+
     def observation_space(self, vehicle_id: str):
-        return self._env.observation_space(self._vehicle_to_player[vehicle_id])
+        return self._env.observation_space(self._player_of[vehicle_id])
 
     def action_space(self, vehicle_id: str):
-        return self._env.action_space(self._vehicle_to_player[vehicle_id])
+        return self._env.action_space(self._player_of[vehicle_id])
 
     def tour_length(self, vehicle_id: str) -> int:
         """Number of goals (orders + depot return) this vehicle must complete."""
@@ -85,59 +90,59 @@ class WarehouseEnv:
 
     def reset(self, seed: Optional[int] = None, options=None):
         obs, info = self._env.reset(seed=seed, options=options)
-        self._goal_hits = {v: 0 for v in self.vehicle_ids}
-        self._finished = {v: False for v in self.vehicle_ids}
+        self._goal_hits = {vehicle: 0 for vehicle in self.vehicle_ids}
+        self._finished = {vehicle: False for vehicle in self.vehicle_ids}
         self._steps = 0
-        return self._remap(obs), self._remap(info)
+        return self._by_vehicle(obs), self._by_vehicle(info)
 
-    def step(self, actions: Dict[str, int]):
-        pz_actions = {
-            self._vehicle_to_player[v]: (0 if self._finished[v] else int(actions.get(v, 0)))
-            for v in self.vehicle_ids
+    def step(self, actions: dict[str, int]):
+        player_actions = {
+            self._player_of[vehicle]: 0 if self._finished[vehicle] else int(actions.get(vehicle, 0))
+            for vehicle in self.vehicle_ids
         }
 
         with warnings.catch_warnings():
             warnings.filterwarnings("ignore", message=".*cycling back to the beginning.*")
-            obs, raw_rewards, _, pz_truncated, infos = self._env.step(pz_actions)
+            obs, raw_rewards, _, raw_truncated, infos = self._env.step(player_actions)
 
         self._steps += 1
-        obs = self._remap(obs)
-        raw_rewards = self._remap(raw_rewards)
-        pz_truncated = self._remap(pz_truncated)
-        infos = self._remap(infos)
+        obs = self._by_vehicle(obs)
+        raw_rewards = self._by_vehicle(raw_rewards)
+        raw_truncated = self._by_vehicle(raw_truncated)
+        infos = self._by_vehicle(infos)
 
-        rewards: Dict[str, float] = {}
-        for v in self.vehicle_ids:
-            if self._finished[v]:
-                rewards[v] = 0.0
+        rewards = {}
+        for vehicle in self.vehicle_ids:
+            if self._finished[vehicle]:
+                rewards[vehicle] = 0.0
                 continue
 
             reward = -self.step_penalty
-            if raw_rewards[v] > 0:
-                self._goal_hits[v] += 1
+            if raw_rewards[vehicle] > 0:
+                self._goal_hits[vehicle] += 1
                 reward += self.goal_reward
-                if self._goal_hits[v] >= len(self.sequences[v]):
-                    self._finished[v] = True
+                if self._goal_hits[vehicle] >= self.tour_length(vehicle):
+                    self._finished[vehicle] = True
                     reward += self.completion_bonus
-            rewards[v] = reward
+            rewards[vehicle] = reward
 
         episode_over = all(self._finished.values())
-        timed_out = bool(pz_truncated) and all(pz_truncated.values())
+        timed_out = bool(raw_truncated) and all(raw_truncated.values())
 
-        terminated = {v: episode_over for v in self.vehicle_ids}
-        truncated = {v: (timed_out and not episode_over) for v in self.vehicle_ids}
+        terminated = {vehicle: episode_over for vehicle in self.vehicle_ids}
+        truncated = {vehicle: timed_out and not episode_over for vehicle in self.vehicle_ids}
 
-        for v in self.vehicle_ids:
-            infos[v] = dict(infos[v])
-            infos[v].update(
-                finished=self._finished[v],
-                goals_completed=self._goal_hits[v],
-                tour_length=len(self.sequences[v]),
+        for vehicle in self.vehicle_ids:
+            info = dict(infos[vehicle])
+            info.update(
+                finished=self._finished[vehicle],
+                goals_completed=self._goal_hits[vehicle],
+                tour_length=self.tour_length(vehicle),
             )
-        if episode_over or timed_out:
-            for v in self.vehicle_ids:
-                infos[v]["episode_solved"] = episode_over
-                infos[v]["episode_steps"] = self._steps
+            if episode_over or timed_out:
+                info["episode_solved"] = episode_over
+                info["episode_steps"] = self._steps
+            infos[vehicle] = info
 
         return obs, rewards, terminated, truncated, infos
 
@@ -147,5 +152,5 @@ class WarehouseEnv:
     def close(self) -> None:
         self._env.close()
 
-    def _remap(self, d: dict) -> dict:
-        return {self._player_to_vehicle[k]: v for k, v in d.items()}
+    def _by_vehicle(self, by_player: dict) -> dict:
+        return {self._vehicle_of[player]: value for player, value in by_player.items()}
