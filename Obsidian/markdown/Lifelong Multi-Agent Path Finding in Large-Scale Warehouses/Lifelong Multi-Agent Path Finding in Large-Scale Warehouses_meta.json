@@ -1,0 +1,911 @@
+{
+  "table_of_contents": [
+    {
+      "title": "Lifelong Multi-Agent Path Finding in Large-Scale Warehouses\u2217",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          110.77199999999999,
+          95.03999999999999
+        ],
+        [
+          502.4745178222656,
+          95.03999999999999
+        ],
+        [
+          502.4745178222656,
+          111.88226318359375
+        ],
+        [
+          110.77199999999999,
+          111.88226318359375
+        ]
+      ]
+    },
+    {
+      "title": "Abstract",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          151.164,
+          214.63200000000003
+        ],
+        [
+          192.168,
+          214.63200000000003
+        ],
+        [
+          192.168,
+          228.0452880859375
+        ],
+        [
+          151.164,
+          228.0452880859375
+        ]
+      ]
+    },
+    {
+      "title": "1 Introduction",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          128.51999999999998,
+          418.968
+        ],
+        [
+          214.812,
+          418.968
+        ],
+        [
+          214.812,
+          433.7117614746094
+        ],
+        [
+          128.51999999999998,
+          433.7117614746094
+        ]
+      ]
+    },
+    {
+      "title": "2 Background",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          394.12800000000004,
+          665.28
+        ],
+        [
+          479.808,
+          665.28
+        ],
+        [
+          479.808,
+          679.6173324584961
+        ],
+        [
+          394.12800000000004,
+          679.6173324584961
+        ]
+      ]
+    },
+    {
+      "title": "2.1 Popular MAPF Solvers",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          50.184000000000005,
+          83.16
+        ],
+        [
+          187.272,
+          83.16
+        ],
+        [
+          187.272,
+          97.62298583984375
+        ],
+        [
+          50.184000000000005,
+          97.62298583984375
+        ]
+      ]
+    },
+    {
+      "title": "2.2 Prior Work on Lifelong MAPF",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          316.404,
+          405.504
+        ],
+        [
+          488.98800000000006,
+          405.504
+        ],
+        [
+          488.98800000000006,
+          419.15185546875
+        ],
+        [
+          316.404,
+          419.15185546875
+        ]
+      ]
+    },
+    {
+      "title": "2.3 Bounded-Horizon Planing",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          50.79600000000001,
+          566.28
+        ],
+        [
+          201.348,
+          566.28
+        ],
+        [
+          201.348,
+          580.0184783935547
+        ],
+        [
+          50.79600000000001,
+          580.0184783935547
+        ]
+      ]
+    },
+    {
+      "title": "3 Problem Definition",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          376.38,
+          51.480000000000004
+        ],
+        [
+          496.33200000000005,
+          51.480000000000004
+        ],
+        [
+          496.33200000000005,
+          66.46112060546875
+        ],
+        [
+          376.38,
+          66.46112060546875
+        ]
+      ]
+    },
+    {
+      "title": "4 Rolling-Horizon Collision Resolution",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          331.70400000000006,
+          555.192
+        ],
+        [
+          542.844,
+          555.192
+        ],
+        [
+          542.844,
+          570.2515869140625
+        ],
+        [
+          331.70400000000006,
+          570.2515869140625
+        ]
+      ]
+    },
+    {
+      "title": "4.1 A* for a Goal Location Sequence",
+      "heading_level": null,
+      "page_id": 3,
+      "polygon": [
+        [
+          50.79600000000001,
+          496.58399999999995
+        ],
+        [
+          232.56,
+          496.58399999999995
+        ],
+        [
+          232.56,
+          510.5576171875
+        ],
+        [
+          50.79600000000001,
+          510.5576171875
+        ]
+      ]
+    },
+    {
+      "title": "4.2 Bounded-Horizon MAPF Solvers",
+      "heading_level": null,
+      "page_id": 4,
+      "polygon": [
+        [
+          50.79600000000001,
+          183.74400000000003
+        ],
+        [
+          233.17200000000003,
+          183.74400000000003
+        ],
+        [
+          233.17200000000003,
+          198.3978271484375
+        ],
+        [
+          50.79600000000001,
+          198.3978271484375
+        ]
+      ]
+    },
+    {
+      "title": "4.3 Behavior of RHCR",
+      "heading_level": null,
+      "page_id": 4,
+      "polygon": [
+        [
+          317.01599999999996,
+          83.952
+        ],
+        [
+          433.29599999999994,
+          83.952
+        ],
+        [
+          433.29599999999994,
+          97.88751220703125
+        ],
+        [
+          317.01599999999996,
+          97.88751220703125
+        ]
+      ]
+    },
+    {
+      "title": "4.4 Avoiding Deadlocks",
+      "heading_level": null,
+      "page_id": 4,
+      "polygon": [
+        [
+          317.01599999999996,
+          665.28
+        ],
+        [
+          436.356,
+          665.28
+        ],
+        [
+          436.356,
+          679.6330871582031
+        ],
+        [
+          317.01599999999996,
+          679.6330871582031
+        ]
+      ]
+    },
+    {
+      "title": "5 Empirical Results",
+      "heading_level": null,
+      "page_id": 5,
+      "polygon": [
+        [
+          380.052,
+          635.9760000000001
+        ],
+        [
+          493.884,
+          635.9760000000001
+        ],
+        [
+          493.884,
+          650.5155944824219
+        ],
+        [
+          380.052,
+          650.5155944824219
+        ]
+      ]
+    },
+    {
+      "title": "5.1 Fulfillment Warehouse Application",
+      "heading_level": null,
+      "page_id": 6,
+      "polygon": [
+        [
+          51.40800000000001,
+          454.608
+        ],
+        [
+          241.74,
+          454.608
+        ],
+        [
+          241.74,
+          468.8846435546875
+        ],
+        [
+          51.40800000000001,
+          468.8846435546875
+        ]
+      ]
+    },
+    {
+      "title": "5.2 Sorting Center Application",
+      "heading_level": null,
+      "page_id": 6,
+      "polygon": [
+        [
+          316.404,
+          128.304
+        ],
+        [
+          470.62800000000004,
+          128.304
+        ],
+        [
+          470.62800000000004,
+          141.58758544921875
+        ],
+        [
+          316.404,
+          141.58758544921875
+        ]
+      ]
+    },
+    {
+      "title": "5.3 Dynamic Bounded Horizons",
+      "heading_level": null,
+      "page_id": 6,
+      "polygon": [
+        [
+          316.404,
+          589.248
+        ],
+        [
+          476.1360000000001,
+          589.248
+        ],
+        [
+          476.1360000000001,
+          603.0711364746094
+        ],
+        [
+          316.404,
+          603.0711364746094
+        ]
+      ]
+    },
+    {
+      "title": "6 Conclusions",
+      "heading_level": null,
+      "page_id": 7,
+      "polygon": [
+        [
+          129.744,
+          519.552
+        ],
+        [
+          213.10792541503906,
+          519.552
+        ],
+        [
+          213.10792541503906,
+          534.7625427246094
+        ],
+        [
+          129.744,
+          534.7625427246094
+        ]
+      ]
+    },
+    {
+      "title": "Acknowledgments",
+      "heading_level": null,
+      "page_id": 7,
+      "polygon": [
+        [
+          386.784,
+          568.656
+        ],
+        [
+          485.928,
+          568.656
+        ],
+        [
+          485.928,
+          583.5875549316406
+        ],
+        [
+          386.784,
+          583.5875549316406
+        ]
+      ]
+    },
+    {
+      "title": "",
+      "heading_level": null,
+      "page_id": 8,
+      "polygon": [
+        [
+          141.984,
+          51.480000000000004
+        ],
+        [
+          201.348,
+          51.480000000000004
+        ],
+        [
+          201.348,
+          64.944
+        ],
+        [
+          141.984,
+          64.944
+        ]
+      ]
+    }
+  ],
+  "page_stats": [
+    {
+      "page_id": 0,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          295
+        ],
+        [
+          "Line",
+          93
+        ],
+        [
+          "Text",
+          13
+        ],
+        [
+          "SectionHeader",
+          4
+        ],
+        [
+          "ListItem",
+          2
+        ],
+        [
+          "PageHeader",
+          1
+        ],
+        [
+          "ListGroup",
+          1
+        ],
+        [
+          "Footnote",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 1,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          172
+        ],
+        [
+          "Line",
+          90
+        ],
+        [
+          "Text",
+          10
+        ],
+        [
+          "SectionHeader",
+          2
+        ],
+        [
+          "Diagram",
+          2
+        ],
+        [
+          "Caption",
+          2
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 2,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          288
+        ],
+        [
+          "Line",
+          113
+        ],
+        [
+          "Text",
+          9
+        ],
+        [
+          "SectionHeader",
+          3
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 3,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          661
+        ],
+        [
+          "Line",
+          133
+        ],
+        [
+          "Text",
+          16
+        ],
+        [
+          "ListGroup",
+          4
+        ],
+        [
+          "Footnote",
+          2
+        ],
+        [
+          "ListItem",
+          2
+        ],
+        [
+          "Equation",
+          1
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 4,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          351
+        ],
+        [
+          "Line",
+          110
+        ],
+        [
+          "Text",
+          11
+        ],
+        [
+          "SectionHeader",
+          3
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 5,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          352
+        ],
+        [
+          "Line",
+          76
+        ],
+        [
+          "Caption",
+          7
+        ],
+        [
+          "Text",
+          6
+        ],
+        [
+          "Figure",
+          3
+        ],
+        [
+          "FigureGroup",
+          3
+        ],
+        [
+          "Picture",
+          2
+        ],
+        [
+          "PictureGroup",
+          2
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "Footnote",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 6,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          407
+        ],
+        [
+          "Line",
+          112
+        ],
+        [
+          "Text",
+          7
+        ],
+        [
+          "SectionHeader",
+          3
+        ],
+        [
+          "Table",
+          1
+        ],
+        [
+          "Caption",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ],
+        [
+          "TableGroup",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 7,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          680
+        ],
+        [
+          "Line",
+          78
+        ],
+        [
+          "Caption",
+          5
+        ],
+        [
+          "Text",
+          5
+        ],
+        [
+          "Table",
+          3
+        ],
+        [
+          "TableGroup",
+          3
+        ],
+        [
+          "ListItem",
+          3
+        ],
+        [
+          "SectionHeader",
+          2
+        ],
+        [
+          "ListGroup",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 8,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          279
+        ],
+        [
+          "Line",
+          109
+        ],
+        [
+          "ListItem",
+          4
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "ListGroup",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 9,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          119
+        ],
+        [
+          "Line",
+          46
+        ],
+        [
+          "ListItem",
+          2
+        ],
+        [
+          "PageHeader",
+          1
+        ],
+        [
+          "ListGroup",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    }
+  ],
+  "debug_data_path": "debug_data/Lifelong Multi-Agent Path Finding in Large-Scale Warehouses"
+}

@@ -1,64 +1,72 @@
-import argparse
-import sys
-from pathlib import Path
+"""Train a single PPO policy shared by every vehicle (parameter-shared IPPO).
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(REPO_ROOT / "src"))
+Hyperparameters live here as constants rather than in a YAML file: they are
+tied to this script and nothing else reads them. The *scenario* -- map, depot
+zones, orders, rewards -- is what varies between experiments, and that stays
+in the packaged scenario file (warehouse_marl/configs/env.yaml).
+"""
+
+import argparse
+from pathlib import Path
 
 from stable_baselines3 import PPO
 from stable_baselines3.common.callbacks import CheckpointCallback
 
-from warehouse_marl.env import build_env, load_config
+from warehouse_marl.env import DEFAULT_ENV_CONFIG, build_env, load_config
 from warehouse_marl.training.evaluate import evaluate_policy
 from warehouse_marl.training.sb3_vec_env import WarehouseVecEnv
 
+POLICY = "MlpPolicy"
+PPO_KWARGS = dict(
+    n_steps=256,
+    batch_size=256,
+    n_epochs=10,
+    gamma=0.99,
+    gae_lambda=0.95,
+    clip_range=0.2,
+    learning_rate=3e-4,
+    ent_coef=0.01,
+    vf_coef=0.5,
+    max_grad_norm=0.5,
+)
+
+TOTAL_TIMESTEPS = 500_000
+SEED = 0
+# Outputs land where you run the script, not next to the installed package.
+CHECKPOINT_DIR = Path("checkpoints")
+CHECKPOINT_EVERY = 50_000
+EVAL_EPISODES = 20
+
 
 def main() -> None:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--env-config", default=str(REPO_ROOT / "configs" / "env.yaml"))
-    parser.add_argument("--train-config", default=str(REPO_ROOT / "configs" / "training.yaml"))
-    parser.add_argument("--timesteps", type=int, default=None, help="overrides the config")
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--env-config", default=str(DEFAULT_ENV_CONFIG),
+                        help="scenario YAML (default: the one bundled with the package)")
+    parser.add_argument("--timesteps", type=int, default=TOTAL_TIMESTEPS)
     args = parser.parse_args()
 
     env_config = load_config(args.env_config)
-    train_config = load_config(args.train_config)
-    total_timesteps = args.timesteps or train_config["total_timesteps"]
+    train_env = WarehouseVecEnv(build_env(env_config))
 
-    train_env = WarehouseVecEnv(build_env(env_config, repo_root=str(REPO_ROOT)))
+    model = PPO(POLICY, train_env, seed=SEED, verbose=1, **PPO_KWARGS)
 
-    model = PPO(
-        train_config["policy"],
-        train_env,
-        n_steps=train_config["n_steps"],
-        batch_size=train_config["batch_size"],
-        n_epochs=train_config["n_epochs"],
-        gamma=train_config["gamma"],
-        gae_lambda=train_config["gae_lambda"],
-        clip_range=train_config["clip_range"],
-        learning_rate=train_config["learning_rate"],
-        ent_coef=train_config["ent_coef"],
-        vf_coef=train_config["vf_coef"],
-        max_grad_norm=train_config["max_grad_norm"],
-        seed=train_config["seed"],
-        verbose=1,
-    )
-
-    checkpoint_dir = REPO_ROOT / train_config["checkpoint_dir"]
-    checkpoint_dir.mkdir(parents=True, exist_ok=True)
+    CHECKPOINT_DIR.mkdir(parents=True, exist_ok=True)
     checkpoints = CheckpointCallback(
-        save_freq=max(1, train_config["checkpoint_every"] // train_env.num_envs),
-        save_path=str(checkpoint_dir),
+        # CheckpointCallback counts calls, not env steps, and one call advances
+        # every sub-env at once -- so divide to get the requested step interval.
+        save_freq=max(1, CHECKPOINT_EVERY // train_env.num_envs),
+        save_path=str(CHECKPOINT_DIR),
         name_prefix="ppo_warehouse",
     )
 
-    model.learn(total_timesteps=total_timesteps, callback=checkpoints)
+    model.learn(total_timesteps=args.timesteps, callback=checkpoints)
 
-    model_path = checkpoint_dir / "ppo_warehouse_final.zip"
+    model_path = CHECKPOINT_DIR / "ppo_warehouse_final.zip"
     model.save(str(model_path))
     print(f"\nsaved model to {model_path}")
 
-    eval_env = build_env(env_config, repo_root=str(REPO_ROOT))
-    metrics = evaluate_policy(model, eval_env, n_episodes=train_config["eval_episodes"])
+    eval_env = build_env(env_config)
+    metrics = evaluate_policy(model, eval_env, n_episodes=EVAL_EPISODES)
     print("\n=== after training ===")
     print(
         f"trained PPO:          solve_rate={metrics['solve_rate']:.0%} "

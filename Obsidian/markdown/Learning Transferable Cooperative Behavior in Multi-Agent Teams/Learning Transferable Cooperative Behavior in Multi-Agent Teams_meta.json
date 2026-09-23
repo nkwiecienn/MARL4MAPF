@@ -1,0 +1,811 @@
+{
+  "table_of_contents": [
+    {
+      "title": "Learning Transferable Cooperative Behavior in\nMulti-Agent Teams",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          127.29599999999999,
+          96.624
+        ],
+        [
+          481.644,
+          96.624
+        ],
+        [
+          481.644,
+          136.57000732421875
+        ],
+        [
+          127.29599999999999,
+          136.57000732421875
+        ]
+      ]
+    },
+    {
+      "title": "Abstract",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          280.296,
+          289.08
+        ],
+        [
+          328.644,
+          289.08
+        ],
+        [
+          328.644,
+          304.2286071777344
+        ],
+        [
+          280.296,
+          304.2286071777344
+        ]
+      ]
+    },
+    {
+      "title": "1 Introduction",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          104.652,
+          498.96
+        ],
+        [
+          190.94400000000002,
+          498.96
+        ],
+        [
+          190.94400000000002,
+          513.942626953125
+        ],
+        [
+          104.652,
+          513.942626953125
+        ]
+      ]
+    },
+    {
+      "title": "2 Related Work",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          105.26399999999998,
+          426.096
+        ],
+        [
+          197.09014892578125,
+          426.096
+        ],
+        [
+          197.09014892578125,
+          441.0796203613281
+        ],
+        [
+          105.26399999999998,
+          441.0796203613281
+        ]
+      ]
+    },
+    {
+      "title": "3 Method",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          105.26399999999998,
+          427.68
+        ],
+        [
+          166.46400000000003,
+          427.68
+        ],
+        [
+          166.46400000000003,
+          442.483642578125
+        ],
+        [
+          105.26399999999998,
+          442.483642578125
+        ]
+      ]
+    },
+    {
+      "title": "3.1 Agent-Entity Graph",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          105.26399999999998,
+          463.32
+        ],
+        [
+          216.64799999999997,
+          463.32
+        ],
+        [
+          216.64799999999997,
+          476.3681945800781
+        ],
+        [
+          105.26399999999998,
+          476.3681945800781
+        ]
+      ]
+    },
+    {
+      "title": "3.2 Learning to communicate",
+      "heading_level": null,
+      "page_id": 3,
+      "polygon": [
+        [
+          105.26399999999998,
+          71.28
+        ],
+        [
+          240.516,
+          71.28
+        ],
+        [
+          240.516,
+          84.045166015625
+        ],
+        [
+          105.26399999999998,
+          84.045166015625
+        ]
+      ]
+    },
+    {
+      "title": "3.3 Curriculum Training",
+      "heading_level": null,
+      "page_id": 4,
+      "polygon": [
+        [
+          105.26399999999998,
+          242.35199999999998
+        ],
+        [
+          221.54399999999998,
+          242.35199999999998
+        ],
+        [
+          221.54399999999998,
+          255.8001708984375
+        ],
+        [
+          105.26399999999998,
+          255.8001708984375
+        ]
+      ]
+    },
+    {
+      "title": "4 Experiments",
+      "heading_level": null,
+      "page_id": 4,
+      "polygon": [
+        [
+          105.26399999999998,
+          414.216
+        ],
+        [
+          191.55599999999998,
+          414.216
+        ],
+        [
+          191.55599999999998,
+          430.06463623046875
+        ],
+        [
+          105.26399999999998,
+          430.06463623046875
+        ]
+      ]
+    },
+    {
+      "title": "4.1 Task Description",
+      "heading_level": null,
+      "page_id": 4,
+      "polygon": [
+        [
+          105.26399999999998,
+          439.56000000000006
+        ],
+        [
+          202.572,
+          439.56000000000006
+        ],
+        [
+          202.572,
+          452.7621765136719
+        ],
+        [
+          105.26399999999998,
+          452.7621765136719
+        ]
+      ]
+    },
+    {
+      "title": "4.2 Implementation Specifications",
+      "heading_level": null,
+      "page_id": 5,
+      "polygon": [
+        [
+          105.26399999999998,
+          266.112
+        ],
+        [
+          259.10272216796875,
+          266.112
+        ],
+        [
+          259.10272216796875,
+          278.58514404296875
+        ],
+        [
+          105.26399999999998,
+          278.58514404296875
+        ]
+      ]
+    },
+    {
+      "title": "4.3 Results",
+      "heading_level": null,
+      "page_id": 5,
+      "polygon": [
+        [
+          105.26399999999998,
+          456.9839999999999
+        ],
+        [
+          161.568,
+          456.9839999999999
+        ],
+        [
+          161.568,
+          470.3161926269531
+        ],
+        [
+          105.26399999999998,
+          470.3161926269531
+        ]
+      ]
+    },
+    {
+      "title": "4.4 Curriculum Training",
+      "heading_level": null,
+      "page_id": 6,
+      "polygon": [
+        [
+          104.652,
+          403.9200000000001
+        ],
+        [
+          221.54399999999998,
+          403.9200000000001
+        ],
+        [
+          221.54399999999998,
+          416.81317138671875
+        ],
+        [
+          104.652,
+          416.81317138671875
+        ]
+      ]
+    },
+    {
+      "title": "4.5 Zero shot Generalization",
+      "heading_level": null,
+      "page_id": 7,
+      "polygon": [
+        [
+          105.26399999999998,
+          369.072
+        ],
+        [
+          236.84400000000002,
+          369.072
+        ],
+        [
+          236.84400000000002,
+          382.5691833496094
+        ],
+        [
+          105.26399999999998,
+          382.5691833496094
+        ]
+      ]
+    },
+    {
+      "title": "5 Conclusion and Future Work",
+      "heading_level": null,
+      "page_id": 7,
+      "polygon": [
+        [
+          105.26399999999998,
+          629.6400000000001
+        ],
+        [
+          275.4,
+          629.6400000000001
+        ],
+        [
+          275.4,
+          644.3186492919922
+        ],
+        [
+          105.26399999999998,
+          644.3186492919922
+        ]
+      ]
+    },
+    {
+      "title": "References",
+      "heading_level": null,
+      "page_id": 8,
+      "polygon": [
+        [
+          104.652,
+          152.856
+        ],
+        [
+          164.01600000000002,
+          152.856
+        ],
+        [
+          164.01600000000002,
+          167.82867431640625
+        ],
+        [
+          104.652,
+          167.82867431640625
+        ]
+      ]
+    }
+  ],
+  "page_stats": [
+    {
+      "page_id": 0,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          98
+        ],
+        [
+          "Line",
+          46
+        ],
+        [
+          "Text",
+          7
+        ],
+        [
+          "SectionHeader",
+          3
+        ],
+        [
+          "PageHeader",
+          1
+        ],
+        [
+          "Footnote",
+          1
+        ],
+        [
+          "Reference",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 1,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          107
+        ],
+        [
+          "Line",
+          42
+        ],
+        [
+          "Text",
+          4
+        ],
+        [
+          "Diagram",
+          1
+        ],
+        [
+          "Caption",
+          1
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 2,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          157
+        ],
+        [
+          "Line",
+          50
+        ],
+        [
+          "Text",
+          9
+        ],
+        [
+          "SectionHeader",
+          2
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 3,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          415
+        ],
+        [
+          "Line",
+          98
+        ],
+        [
+          "Text",
+          6
+        ],
+        [
+          "Reference",
+          2
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "Diagram",
+          1
+        ],
+        [
+          "Caption",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 4,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          224
+        ],
+        [
+          "Line",
+          58
+        ],
+        [
+          "Text",
+          8
+        ],
+        [
+          "SectionHeader",
+          3
+        ],
+        [
+          "Footnote",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 5,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          217
+        ],
+        [
+          "Line",
+          41
+        ],
+        [
+          "Text",
+          5
+        ],
+        [
+          "SectionHeader",
+          2
+        ],
+        [
+          "Footnote",
+          2
+        ],
+        [
+          "Figure",
+          1
+        ],
+        [
+          "Caption",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ],
+        [
+          "FigureGroup",
+          1
+        ],
+        [
+          "Reference",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 6,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          361
+        ],
+        [
+          "Line",
+          50
+        ],
+        [
+          "Text",
+          5
+        ],
+        [
+          "Caption",
+          2
+        ],
+        [
+          "Table",
+          2
+        ],
+        [
+          "TableGroup",
+          2
+        ],
+        [
+          "Reference",
+          2
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 7,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          233
+        ],
+        [
+          "Line",
+          46
+        ],
+        [
+          "Text",
+          7
+        ],
+        [
+          "Caption",
+          2
+        ],
+        [
+          "Table",
+          2
+        ],
+        [
+          "SectionHeader",
+          2
+        ],
+        [
+          "TableGroup",
+          2
+        ],
+        [
+          "Reference",
+          2
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 8,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          136
+        ],
+        [
+          "Line",
+          47
+        ],
+        [
+          "Reference",
+          15
+        ],
+        [
+          "Text",
+          2
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "ListGroup",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 9,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          75
+        ],
+        [
+          "Line",
+          24
+        ],
+        [
+          "Reference",
+          10
+        ],
+        [
+          "ListGroup",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ],
+        [
+          "Text",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    }
+  ],
+  "debug_data_path": "debug_data/Learning Transferable Cooperative Behavior in Multi-Agent Teams"
+}

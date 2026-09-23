@@ -1,0 +1,1535 @@
+{
+  "table_of_contents": [
+    {
+      "title": "Constrained Policy Optimization",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          194.61599999999999,
+          86.328
+        ],
+        [
+          399.6360000000001,
+          86.328
+        ],
+        [
+          399.6360000000001,
+          103.92132568359375
+        ],
+        [
+          194.61599999999999,
+          103.92132568359375
+        ]
+      ]
+    },
+    {
+      "title": "Abstract",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          146.88,
+          172.656
+        ],
+        [
+          194.68331909179688,
+          172.656
+        ],
+        [
+          194.68331909179688,
+          186.64471435546875
+        ],
+        [
+          146.88,
+          186.64471435546875
+        ]
+      ]
+    },
+    {
+      "title": "1. Introduction",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          52.63199999999999,
+          542.52
+        ],
+        [
+          132.804,
+          542.52
+        ],
+        [
+          132.804,
+          557.6335296630859
+        ],
+        [
+          52.63199999999999,
+          557.6335296630859
+        ]
+      ]
+    },
+    {
+      "title": "2. Related Work",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          52.019999999999996,
+          159.984
+        ],
+        [
+          138.924,
+          159.984
+        ],
+        [
+          138.924,
+          173.8406982421875
+        ],
+        [
+          52.019999999999996,
+          173.8406982421875
+        ]
+      ]
+    },
+    {
+      "title": "3. Preliminaries",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          52.019999999999996,
+          631.224
+        ],
+        [
+          136.476,
+          631.224
+        ],
+        [
+          136.476,
+          646.1865234375
+        ],
+        [
+          52.019999999999996,
+          646.1865234375
+        ]
+      ]
+    },
+    {
+      "title": "4. Constrained Markov Decision Processes",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          306.0,
+          469.65599999999995
+        ],
+        [
+          525.708,
+          469.65599999999995
+        ],
+        [
+          525.708,
+          484.2075500488281
+        ],
+        [
+          306.0,
+          484.2075500488281
+        ]
+      ]
+    },
+    {
+      "title": "5. Constrained Policy Optimization",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          52.019999999999996,
+          171.86399999999998
+        ],
+        [
+          236.232,
+          171.86399999999998
+        ],
+        [
+          236.232,
+          185.795654296875
+        ],
+        [
+          52.019999999999996,
+          185.795654296875
+        ]
+      ]
+    },
+    {
+      "title": "5.1. Policy Performance Bounds",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          306.0,
+          229.67999999999995
+        ],
+        [
+          443.08799999999997,
+          229.67999999999995
+        ],
+        [
+          443.08799999999997,
+          241.72332763671875
+        ],
+        [
+          306.0,
+          241.72332763671875
+        ]
+      ]
+    },
+    {
+      "title": "5.2. Trust Region Methods",
+      "heading_level": null,
+      "page_id": 3,
+      "polygon": [
+        [
+          306.0,
+          150.48000000000002
+        ],
+        [
+          419.8878173828125,
+          150.48000000000002
+        ],
+        [
+          419.8878173828125,
+          162.35999999999999
+        ],
+        [
+          306.0,
+          162.35999999999999
+        ]
+      ]
+    },
+    {
+      "title": "5.3. Trust Region Optimization for Constrained MDPs",
+      "heading_level": null,
+      "page_id": 4,
+      "polygon": [
+        [
+          53.24399999999999,
+          68.112
+        ],
+        [
+          287.64,
+          68.112
+        ],
+        [
+          287.64,
+          79.2
+        ],
+        [
+          53.24399999999999,
+          79.2
+        ]
+      ]
+    },
+    {
+      "title": "6. Practical Implementation",
+      "heading_level": null,
+      "page_id": 4,
+      "polygon": [
+        [
+          306.0,
+          68.112
+        ],
+        [
+          449.88623046875,
+          68.112
+        ],
+        [
+          449.88623046875,
+          79.5216064453125
+        ],
+        [
+          306.0,
+          79.5216064453125
+        ]
+      ]
+    },
+    {
+      "title": "6.1. Approximately Solving the CPO Update",
+      "heading_level": null,
+      "page_id": 4,
+      "polygon": [
+        [
+          306.0,
+          196.416
+        ],
+        [
+          495.72,
+          196.416
+        ],
+        [
+          495.72,
+          207.50400000000002
+        ],
+        [
+          306.0,
+          207.50400000000002
+        ]
+      ]
+    },
+    {
+      "title": "Algorithm 1 Constrained Policy Optimization",
+      "heading_level": null,
+      "page_id": 5,
+      "polygon": [
+        [
+          53.24399999999999,
+          67.32000000000001
+        ],
+        [
+          241.12800000000001,
+          67.32000000000001
+        ],
+        [
+          241.12800000000001,
+          79.2
+        ],
+        [
+          53.24399999999999,
+          79.2
+        ]
+      ]
+    },
+    {
+      "title": "6.2. Feasibility",
+      "heading_level": null,
+      "page_id": 5,
+      "polygon": [
+        [
+          53.24399999999999,
+          396.79200000000003
+        ],
+        [
+          116.90924835205078,
+          396.79200000000003
+        ],
+        [
+          116.90924835205078,
+          409.3760681152344
+        ],
+        [
+          53.24399999999999,
+          409.3760681152344
+        ]
+      ]
+    },
+    {
+      "title": "6.3. Tightening Constraints via Cost Shaping",
+      "heading_level": null,
+      "page_id": 5,
+      "polygon": [
+        [
+          53.24399999999999,
+          607.4639999999999
+        ],
+        [
+          246.63600000000002,
+          607.4639999999999
+        ],
+        [
+          246.63600000000002,
+          619.8221740722656
+        ],
+        [
+          53.24399999999999,
+          619.8221740722656
+        ]
+      ]
+    },
+    {
+      "title": "7. Connections to Prior Work",
+      "heading_level": null,
+      "page_id": 5,
+      "polygon": [
+        [
+          306.0,
+          195.624
+        ],
+        [
+          457.77600000000007,
+          195.624
+        ],
+        [
+          457.77600000000007,
+          209.7056884765625
+        ],
+        [
+          306.0,
+          209.7056884765625
+        ]
+      ]
+    },
+    {
+      "title": "8. Experiments",
+      "heading_level": null,
+      "page_id": 5,
+      "polygon": [
+        [
+          306.0,
+          419.76000000000005
+        ],
+        [
+          384.948,
+          419.76000000000005
+        ],
+        [
+          384.948,
+          434.4706115722656
+        ],
+        [
+          306.0,
+          434.4706115722656
+        ]
+      ]
+    },
+    {
+      "title": "8.1. Evaluating CPO and Comparison Analysis",
+      "heading_level": null,
+      "page_id": 6,
+      "polygon": [
+        [
+          52.019999999999996,
+          571.8240000000001
+        ],
+        [
+          255.204,
+          571.8240000000001
+        ],
+        [
+          255.204,
+          584.916015625
+        ],
+        [
+          52.019999999999996,
+          584.916015625
+        ]
+      ]
+    },
+    {
+      "title": "8.2. Ablation on Cost Shaping",
+      "heading_level": null,
+      "page_id": 7,
+      "polygon": [
+        [
+          52.019999999999996,
+          625.6800000000001
+        ],
+        [
+          182.21408081054688,
+          625.6800000000001
+        ],
+        [
+          182.21408081054688,
+          638.7149963378906
+        ],
+        [
+          52.019999999999996,
+          638.7149963378906
+        ]
+      ]
+    },
+    {
+      "title": "8.3. Constraint vs. Fixed Penalty",
+      "heading_level": null,
+      "page_id": 7,
+      "polygon": [
+        [
+          303.552,
+          231.26399999999998
+        ],
+        [
+          445.9300842285156,
+          231.26399999999998
+        ],
+        [
+          445.9300842285156,
+          243.9591064453125
+        ],
+        [
+          303.552,
+          243.9591064453125
+        ]
+      ]
+    },
+    {
+      "title": "9. Discussion",
+      "heading_level": null,
+      "page_id": 7,
+      "polygon": [
+        [
+          303.552,
+          414.216
+        ],
+        [
+          373.2055969238281,
+          414.216
+        ],
+        [
+          373.2055969238281,
+          429.0775146484375
+        ],
+        [
+          303.552,
+          429.0775146484375
+        ]
+      ]
+    },
+    {
+      "title": "Acknowledgements",
+      "heading_level": null,
+      "page_id": 7,
+      "polygon": [
+        [
+          303.552,
+          605.88
+        ],
+        [
+          406.36800000000005,
+          605.88
+        ],
+        [
+          406.36800000000005,
+          620.4774322509766
+        ],
+        [
+          303.552,
+          620.4774322509766
+        ]
+      ]
+    },
+    {
+      "title": "",
+      "heading_level": null,
+      "page_id": 8,
+      "polygon": [
+        [
+          51.40800000000001,
+          93.45599999999999
+        ],
+        [
+          111.99600000000001,
+          93.45599999999999
+        ],
+        [
+          111.99600000000001,
+          106.12800000000001
+        ],
+        [
+          51.40800000000001,
+          106.12800000000001
+        ]
+      ]
+    },
+    {
+      "title": "10. Appendix",
+      "heading_level": null,
+      "page_id": 10,
+      "polygon": [
+        [
+          52.63199999999999,
+          65.736
+        ],
+        [
+          123.01200000000001,
+          65.736
+        ],
+        [
+          123.01200000000001,
+          79.52166748046875
+        ],
+        [
+          52.63199999999999,
+          79.52166748046875
+        ]
+      ]
+    },
+    {
+      "title": "10.1. Proof of Policy Performance Bound",
+      "heading_level": null,
+      "page_id": 10,
+      "polygon": [
+        [
+          52.63199999999999,
+          86.328
+        ],
+        [
+          228.88800000000003,
+          86.328
+        ],
+        [
+          228.88800000000003,
+          98.4781494140625
+        ],
+        [
+          52.63199999999999,
+          98.4781494140625
+        ]
+      ]
+    },
+    {
+      "title": "10.1.1. PRELIMINARIES",
+      "heading_level": null,
+      "page_id": 10,
+      "polygon": [
+        [
+          52.63199999999999,
+          105.33600000000001
+        ],
+        [
+          156.67200000000003,
+          105.33600000000001
+        ],
+        [
+          156.67200000000003,
+          117.200927734375
+        ],
+        [
+          52.63199999999999,
+          117.200927734375
+        ]
+      ]
+    },
+    {
+      "title": "10.1.2. MAIN RESULTS",
+      "heading_level": null,
+      "page_id": 11,
+      "polygon": [
+        [
+          52.019999999999996,
+          182.16000000000003
+        ],
+        [
+          154.836,
+          182.16000000000003
+        ],
+        [
+          154.836,
+          193.29986572265625
+        ],
+        [
+          52.019999999999996,
+          193.29986572265625
+        ]
+      ]
+    },
+    {
+      "title": "10.2. Proof of Analytical Solution to LQCLP",
+      "heading_level": null,
+      "page_id": 13,
+      "polygon": [
+        [
+          52.019999999999996,
+          558.3599999999999
+        ],
+        [
+          244.8,
+          558.3599999999999
+        ],
+        [
+          244.8,
+          570.5671844482422
+        ],
+        [
+          52.019999999999996,
+          570.5671844482422
+        ]
+      ]
+    },
+    {
+      "title": "10.3. Experimental Parameters",
+      "heading_level": null,
+      "page_id": 15,
+      "polygon": [
+        [
+          51.40800000000001,
+          485.496
+        ],
+        [
+          187.88400000000001,
+          485.496
+        ],
+        [
+          187.88400000000001,
+          499.3791809082031
+        ],
+        [
+          51.40800000000001,
+          499.3791809082031
+        ]
+      ]
+    },
+    {
+      "title": "10.3.1. ENVIRONMENTS",
+      "heading_level": null,
+      "page_id": 15,
+      "polygon": [
+        [
+          51.40800000000001,
+          505.29600000000005
+        ],
+        [
+          158.50799999999998,
+          505.29600000000005
+        ],
+        [
+          158.50799999999998,
+          518.1009216308594
+        ],
+        [
+          51.40800000000001,
+          518.1009216308594
+        ]
+      ]
+    },
+    {
+      "title": "10.3.2. ALGORITHM PARAMETERS",
+      "heading_level": null,
+      "page_id": 16,
+      "polygon": [
+        [
+          52.019999999999996,
+          224.928
+        ],
+        [
+          202.66712951660156,
+          224.928
+        ],
+        [
+          202.66712951660156,
+          236.82489013671875
+        ],
+        [
+          52.019999999999996,
+          236.82489013671875
+        ]
+      ]
+    },
+    {
+      "title": "10.3.3. PRIMAL-DUAL OPTIMIZATION IMPLEMENTATION",
+      "heading_level": null,
+      "page_id": 16,
+      "polygon": [
+        [
+          52.019999999999996,
+          662.112
+        ],
+        [
+          298.044,
+          662.112
+        ],
+        [
+          298.044,
+          674.6499176025391
+        ],
+        [
+          52.019999999999996,
+          674.6499176025391
+        ]
+      ]
+    }
+  ],
+  "page_stats": [
+    {
+      "page_id": 0,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          261
+        ],
+        [
+          "Line",
+          87
+        ],
+        [
+          "Text",
+          8
+        ],
+        [
+          "SectionHeader",
+          3
+        ],
+        [
+          "PageHeader",
+          1
+        ],
+        [
+          "Footnote",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 1,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          765
+        ],
+        [
+          "Line",
+          148
+        ],
+        [
+          "Text",
+          15
+        ],
+        [
+          "SectionHeader",
+          3
+        ],
+        [
+          "Equation",
+          3
+        ],
+        [
+          "PageHeader",
+          1
+        ],
+        [
+          "Reference",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 2,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          814
+        ],
+        [
+          "Line",
+          186
+        ],
+        [
+          "Text",
+          15
+        ],
+        [
+          "Equation",
+          6
+        ],
+        [
+          "SectionHeader",
+          2
+        ],
+        [
+          "PageHeader",
+          1
+        ],
+        [
+          "Reference",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 3,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          965
+        ],
+        [
+          "Line",
+          214
+        ],
+        [
+          "Text",
+          18
+        ],
+        [
+          "Equation",
+          6
+        ],
+        [
+          "PageHeader",
+          1
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "Reference",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 4,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          827
+        ],
+        [
+          "Line",
+          206
+        ],
+        [
+          "Text",
+          12
+        ],
+        [
+          "Equation",
+          7
+        ],
+        [
+          "SectionHeader",
+          3
+        ],
+        [
+          "PageHeader",
+          1
+        ],
+        [
+          "Reference",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 5,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          462
+        ],
+        [
+          "Line",
+          117
+        ],
+        [
+          "Text",
+          24
+        ],
+        [
+          "SectionHeader",
+          5
+        ],
+        [
+          "ListItem",
+          5
+        ],
+        [
+          "Equation",
+          3
+        ],
+        [
+          "ListGroup",
+          2
+        ],
+        [
+          "PageHeader",
+          1
+        ],
+        [
+          "Reference",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 6,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          233
+        ],
+        [
+          "Line",
+          67
+        ],
+        [
+          "Text",
+          8
+        ],
+        [
+          "Caption",
+          2
+        ],
+        [
+          "PageHeader",
+          1
+        ],
+        [
+          "Figure",
+          1
+        ],
+        [
+          "ListGroup",
+          1
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "Picture",
+          1
+        ],
+        [
+          "FigureGroup",
+          1
+        ],
+        [
+          "PictureGroup",
+          1
+        ],
+        [
+          "ListItem",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 7,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          200
+        ],
+        [
+          "Line",
+          73
+        ],
+        [
+          "Text",
+          8
+        ],
+        [
+          "SectionHeader",
+          4
+        ],
+        [
+          "Figure",
+          2
+        ],
+        [
+          "Caption",
+          2
+        ],
+        [
+          "FigureGroup",
+          2
+        ],
+        [
+          "PageHeader",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 8,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          267
+        ],
+        [
+          "Line",
+          97
+        ],
+        [
+          "Text",
+          9
+        ],
+        [
+          "PageHeader",
+          1
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "ListGroup",
+          1
+        ],
+        [
+          "Reference",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 9,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          115
+        ],
+        [
+          "Line",
+          44
+        ],
+        [
+          "Text",
+          9
+        ],
+        [
+          "PageHeader",
+          1
+        ],
+        [
+          "Reference",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 10,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          710
+        ],
+        [
+          "Line",
+          120
+        ],
+        [
+          "Text",
+          11
+        ],
+        [
+          "Equation",
+          7
+        ],
+        [
+          "SectionHeader",
+          3
+        ],
+        [
+          "PageHeader",
+          1
+        ],
+        [
+          "Reference",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 11,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          850
+        ],
+        [
+          "Line",
+          232
+        ],
+        [
+          "Text",
+          11
+        ],
+        [
+          "Equation",
+          7
+        ],
+        [
+          "PageHeader",
+          1
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "Reference",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 12,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          655
+        ],
+        [
+          "Line",
+          158
+        ],
+        [
+          "Text",
+          10
+        ],
+        [
+          "Equation",
+          4
+        ],
+        [
+          "PageHeader",
+          1
+        ],
+        [
+          "Reference",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 13,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          727
+        ],
+        [
+          "Line",
+          167
+        ],
+        [
+          "Text",
+          33
+        ],
+        [
+          "Equation",
+          7
+        ],
+        [
+          "PageHeader",
+          1
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "Reference",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 14,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          1089
+        ],
+        [
+          "Line",
+          262
+        ],
+        [
+          "Text",
+          7
+        ],
+        [
+          "Equation",
+          4
+        ],
+        [
+          "ListItem",
+          2
+        ],
+        [
+          "PageHeader",
+          1
+        ],
+        [
+          "ListGroup",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 15,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          578
+        ],
+        [
+          "Line",
+          136
+        ],
+        [
+          "Text",
+          10
+        ],
+        [
+          "Equation",
+          5
+        ],
+        [
+          "Table",
+          2
+        ],
+        [
+          "SectionHeader",
+          2
+        ],
+        [
+          "PageHeader",
+          1
+        ],
+        [
+          "ListGroup",
+          1
+        ],
+        [
+          "ListItem",
+          1
+        ],
+        [
+          "Reference",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 16,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          264
+        ],
+        [
+          "Line",
+          50
+        ],
+        [
+          "Text",
+          8
+        ],
+        [
+          "SectionHeader",
+          2
+        ],
+        [
+          "PageHeader",
+          1
+        ],
+        [
+          "Picture",
+          1
+        ],
+        [
+          "Caption",
+          1
+        ],
+        [
+          "Table",
+          1
+        ],
+        [
+          "PictureGroup",
+          1
+        ],
+        [
+          "Reference",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 17,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          165
+        ],
+        [
+          "Line",
+          20
+        ],
+        [
+          "Text",
+          3
+        ],
+        [
+          "PageHeader",
+          1
+        ],
+        [
+          "Equation",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    }
+  ],
+  "debug_data_path": "debug_data/Constrained Policy Optimization"
+}

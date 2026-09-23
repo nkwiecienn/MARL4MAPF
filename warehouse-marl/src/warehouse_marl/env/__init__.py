@@ -1,6 +1,6 @@
 from warehouse_marl.env.depots import allocate_depot_cells
 from warehouse_marl.env.routing import build_sequence, order_nodes
-from warehouse_marl.env.scenario import build_env, load_config
+from warehouse_marl.env.scenario import DEFAULT_ENV_CONFIG, build_env, load_config
 from warehouse_marl.env.warehouse_env import WarehouseEnv
 
 __all__ = [
@@ -10,4 +10,5 @@ __all__ = [
     "order_nodes",
     "build_env",
     "load_config",
+    "DEFAULT_ENV_CONFIG",
 ]

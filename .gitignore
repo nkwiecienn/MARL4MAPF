@@ -11,6 +11,3 @@ checkpoints/
 *.svg
 .pytest_cache/
 .DS_Store
-
-Obsidian/
-README.md

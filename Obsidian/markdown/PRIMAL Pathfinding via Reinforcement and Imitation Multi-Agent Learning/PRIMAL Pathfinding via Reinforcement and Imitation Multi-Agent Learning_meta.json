@@ -1,0 +1,838 @@
+{
+  "table_of_contents": [
+    {
+      "title": "PRIMAL: Pathfinding via Reinforcement and Imitation\nMulti-Agent Learning",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          107.71199999999999,
+          68.112
+        ],
+        [
+          501.22799999999995,
+          68.112
+        ],
+        [
+          501.22799999999995,
+          108.29949951171875
+        ],
+        [
+          107.71199999999999,
+          108.29949951171875
+        ]
+      ]
+    },
+    {
+      "title": "I. INTRODUCTION",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          126.68399999999998,
+          419.76000000000005
+        ],
+        [
+          222.462158203125,
+          419.76000000000005
+        ],
+        [
+          222.462158203125,
+          433.6260986328125
+        ],
+        [
+          126.68399999999998,
+          433.6260986328125
+        ]
+      ]
+    },
+    {
+      "title": "II. PRIOR WORK",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          132.804,
+          51.480000000000004
+        ],
+        [
+          217.87199999999999,
+          51.480000000000004
+        ],
+        [
+          217.87199999999999,
+          64.18890380859375
+        ],
+        [
+          132.804,
+          64.18890380859375
+        ]
+      ]
+    },
+    {
+      "title": "A. Multi-Agent Path Finding (MAPF)",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          50.184000000000005,
+          68.904
+        ],
+        [
+          208.39039611816406,
+          68.904
+        ],
+        [
+          208.39039611816406,
+          81.1573486328125
+        ],
+        [
+          50.184000000000005,
+          81.1573486328125
+        ]
+      ]
+    },
+    {
+      "title": "B. Multi-Agent Reinforcement Learning (MARL)",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          50.184000000000005,
+          692.208
+        ],
+        [
+          253.36799999999997,
+          692.208
+        ],
+        [
+          253.36799999999997,
+          705.3732299804688
+        ],
+        [
+          50.184000000000005,
+          705.3732299804688
+        ]
+      ]
+    },
+    {
+      "title": "III. POLICY REPRESENTATION",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          355.57199999999995,
+          687.4559999999999
+        ],
+        [
+          512.856,
+          687.4559999999999
+        ],
+        [
+          512.856,
+          701.5228424072266
+        ],
+        [
+          355.57199999999995,
+          701.5228424072266
+        ]
+      ]
+    },
+    {
+      "title": "A. Observation Space",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          50.79600000000001,
+          83.16
+        ],
+        [
+          144.432,
+          83.16
+        ],
+        [
+          144.432,
+          96.10833740234375
+        ],
+        [
+          50.79600000000001,
+          96.10833740234375
+        ]
+      ]
+    },
+    {
+      "title": "B. Action Space",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          50.79600000000001,
+          396.0
+        ],
+        [
+          120.84902954101562,
+          396.0
+        ],
+        [
+          120.84902954101562,
+          406.9984436035156
+        ],
+        [
+          50.79600000000001,
+          406.9984436035156
+        ]
+      ]
+    },
+    {
+      "title": "C. Reward Structure",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          50.79600000000001,
+          633.6
+        ],
+        [
+          138.924,
+          633.6
+        ],
+        [
+          138.924,
+          646.0477142333984
+        ],
+        [
+          50.79600000000001,
+          646.0477142333984
+        ]
+      ]
+    },
+    {
+      "title": "D. Actor-Critic Network",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          310.284,
+          694.584
+        ],
+        [
+          414.324,
+          694.584
+        ],
+        [
+          414.324,
+          706.6367797851562
+        ],
+        [
+          310.284,
+          706.6367797851562
+        ]
+      ]
+    },
+    {
+      "title": "IV. LEARNING",
+      "heading_level": null,
+      "page_id": 3,
+      "polygon": [
+        [
+          394.12800000000004,
+          255.024
+        ],
+        [
+          472.464,
+          255.024
+        ],
+        [
+          472.464,
+          267.32684326171875
+        ],
+        [
+          394.12800000000004,
+          267.32684326171875
+        ]
+      ]
+    },
+    {
+      "title": "A. Coordination Learning",
+      "heading_level": null,
+      "page_id": 3,
+      "polygon": [
+        [
+          309.06,
+          348.48
+        ],
+        [
+          420.4440000000001,
+          348.48
+        ],
+        [
+          420.4440000000001,
+          360.03118896484375
+        ],
+        [
+          309.06,
+          360.03118896484375
+        ]
+      ]
+    },
+    {
+      "title": "B. Training Details",
+      "heading_level": null,
+      "page_id": 5,
+      "polygon": [
+        [
+          50.79600000000001,
+          95.03999999999999
+        ],
+        [
+          134.64000000000001,
+          95.03999999999999
+        ],
+        [
+          134.64000000000001,
+          108.00335693359375
+        ],
+        [
+          50.79600000000001,
+          108.00335693359375
+        ]
+      ]
+    },
+    {
+      "title": "V. RESULTS",
+      "heading_level": null,
+      "page_id": 5,
+      "polygon": [
+        [
+          143.20800000000003,
+          476.784
+        ],
+        [
+          206.24400000000003,
+          476.784
+        ],
+        [
+          206.24400000000003,
+          490.7049255371094
+        ],
+        [
+          143.20800000000003,
+          490.7049255371094
+        ]
+      ]
+    },
+    {
+      "title": "A. Comparison with Other MAPF Planners",
+      "heading_level": null,
+      "page_id": 5,
+      "polygon": [
+        [
+          50.79600000000001,
+          585.288
+        ],
+        [
+          233.784,
+          585.288
+        ],
+        [
+          233.784,
+          598.3653411865234
+        ],
+        [
+          50.79600000000001,
+          598.3653411865234
+        ]
+      ]
+    },
+    {
+      "title": "B. Experimental Validation",
+      "heading_level": null,
+      "page_id": 6,
+      "polygon": [
+        [
+          50.79600000000001,
+          644.688
+        ],
+        [
+          166.46400000000003,
+          644.688
+        ],
+        [
+          166.46400000000003,
+          658.1273498535156
+        ],
+        [
+          50.79600000000001,
+          658.1273498535156
+        ]
+      ]
+    },
+    {
+      "title": "VI. CONCLUSION",
+      "heading_level": null,
+      "page_id": 6,
+      "polygon": [
+        [
+          386.784,
+          643.104
+        ],
+        [
+          479.808,
+          643.104
+        ],
+        [
+          479.808,
+          657.846923828125
+        ],
+        [
+          386.784,
+          657.846923828125
+        ]
+      ]
+    },
+    {
+      "title": "",
+      "heading_level": null,
+      "page_id": 7,
+      "polygon": [
+        [
+          115.05599999999998,
+          272.448
+        ],
+        [
+          231.33599999999998,
+          272.448
+        ],
+        [
+          231.33599999999998,
+          282.74399999999997
+        ],
+        [
+          115.05599999999998,
+          282.74399999999997
+        ]
+      ]
+    },
+    {
+      "title": "",
+      "heading_level": null,
+      "page_id": 7,
+      "polygon": [
+        [
+          141.984,
+          422.928
+        ],
+        [
+          203.796,
+          422.928
+        ],
+        [
+          203.796,
+          432.432
+        ],
+        [
+          141.984,
+          432.432
+        ]
+      ]
+    }
+  ],
+  "page_stats": [
+    {
+      "page_id": 0,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          211
+        ],
+        [
+          "Line",
+          97
+        ],
+        [
+          "Text",
+          6
+        ],
+        [
+          "SectionHeader",
+          2
+        ],
+        [
+          "PageHeader",
+          1
+        ],
+        [
+          "Picture",
+          1
+        ],
+        [
+          "Caption",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ],
+        [
+          "Reference",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 1,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          229
+        ],
+        [
+          "Line",
+          113
+        ],
+        [
+          "Text",
+          8
+        ],
+        [
+          "SectionHeader",
+          4
+        ],
+        [
+          "Reference",
+          2
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 2,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          234
+        ],
+        [
+          "Line",
+          99
+        ],
+        [
+          "Text",
+          8
+        ],
+        [
+          "SectionHeader",
+          4
+        ],
+        [
+          "Caption",
+          3
+        ],
+        [
+          "Reference",
+          3
+        ],
+        [
+          "Figure",
+          1
+        ],
+        [
+          "Table",
+          1
+        ],
+        [
+          "FigureGroup",
+          1
+        ],
+        [
+          "TableGroup",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 3,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          483
+        ],
+        [
+          "Line",
+          149
+        ],
+        [
+          "Text",
+          9
+        ],
+        [
+          "Equation",
+          2
+        ],
+        [
+          "SectionHeader",
+          2
+        ],
+        [
+          "Reference",
+          2
+        ],
+        [
+          "Diagram",
+          1
+        ],
+        [
+          "Caption",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 4,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          350
+        ],
+        [
+          "Line",
+          114
+        ],
+        [
+          "Text",
+          8
+        ],
+        [
+          "Reference",
+          2
+        ],
+        [
+          "Equation",
+          1
+        ],
+        [
+          "Diagram",
+          1
+        ],
+        [
+          "Caption",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 5,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          462
+        ],
+        [
+          "Line",
+          118
+        ],
+        [
+          "Text",
+          7
+        ],
+        [
+          "SectionHeader",
+          3
+        ],
+        [
+          "Reference",
+          2
+        ],
+        [
+          "Figure",
+          1
+        ],
+        [
+          "Caption",
+          1
+        ],
+        [
+          "FigureGroup",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 6,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          251
+        ],
+        [
+          "Line",
+          89
+        ],
+        [
+          "Text",
+          5
+        ],
+        [
+          "Reference",
+          3
+        ],
+        [
+          "SectionHeader",
+          2
+        ],
+        [
+          "Caption",
+          2
+        ],
+        [
+          "Figure",
+          1
+        ],
+        [
+          "Picture",
+          1
+        ],
+        [
+          "FigureGroup",
+          1
+        ],
+        [
+          "PictureGroup",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 7,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          524
+        ],
+        [
+          "Line",
+          134
+        ],
+        [
+          "ListItem",
+          5
+        ],
+        [
+          "Text",
+          3
+        ],
+        [
+          "SectionHeader",
+          2
+        ],
+        [
+          "ListGroup",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 8,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          42
+        ],
+        [
+          "Line",
+          9
+        ],
+        [
+          "ListGroup",
+          1
+        ],
+        [
+          "Text",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    }
+  ],
+  "debug_data_path": "debug_data/PRIMAL Pathfinding via Reinforcement and Imitation Multi-Agent Learning"
+}

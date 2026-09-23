@@ -8,6 +8,26 @@ from warehouse_marl.env.routing import Coord, build_sequence
 
 
 class WarehouseEnv:
+    """Episodic warehouse VRP on top of POGEMA's lifelong (`on_target="restart"`) mode.
+
+    POGEMA's lifelong mode is built for *endless* operation: when an agent
+    exhausts its goal sequence, POGEMA silently wraps back to the first goal
+    and keeps paying +1 forever. Left alone, a policy would learn to loop its
+    tour for unbounded reward and the episode would never end.
+
+    So this class owns the terminal condition: it counts goal completions per
+    vehicle, freezes a vehicle once it has completed its sequence (zero reward,
+    forced idle), and reports termination when every vehicle is done. Frozen
+    vehicles are *not* removed -- they still occupy a cell and can block
+    others, like a real parked vehicle.
+
+    The API is PettingZoo-parallel-shaped (dicts keyed by vehicle id) but this
+    is not a registered ParallelEnv; notably `agents` keeps listing finished
+    vehicles, because they are still physically present.
+    """
+
+    # POGEMA renders through its own wrapper rather than a Gymnasium render
+    # mode; the attribute exists only because SB3 looks it up on the env.
     render_mode = None
 
     def __init__(
@@ -76,7 +96,25 @@ class WarehouseEnv:
 
     @property
     def goal_hits(self) -> dict[str, int]:
+        """Snapshot of goals completed per vehicle.
+
+        A fresh dict each call, so callers can log successive values without
+        every entry aliasing the same live counter.
+        """
         return dict(self._goal_hits)
+
+    @property
+    def pogema_grid(self):
+        """The POGEMA grid underneath.
+
+        Exposed so the renderer can wrap it in a recorder without reaching
+        through this class's private attributes.
+        """
+        return self._env.pogema
+
+    @pogema_grid.setter
+    def pogema_grid(self, grid) -> None:
+        self._env.pogema = grid
 
     def observation_space(self, vehicle_id: str):
         return self._env.observation_space(self._player_of[vehicle_id])
@@ -102,6 +140,9 @@ class WarehouseEnv:
         }
 
         with warnings.catch_warnings():
+            # A finished vehicle keeps stepping (frozen), so POGEMA keeps
+            # wrapping its exhausted goal list and warning about it. That is
+            # expected here -- this class, not POGEMA, ends the episode.
             warnings.filterwarnings("ignore", message=".*cycling back to the beginning.*")
             obs, raw_rewards, _, raw_truncated, infos = self._env.step(player_actions)
 
@@ -118,7 +159,7 @@ class WarehouseEnv:
                 continue
 
             reward = -self.step_penalty
-            if raw_rewards[vehicle] > 0:
+            if raw_rewards[vehicle] > 0:  # POGEMA pays out iff a goal was reached
                 self._goal_hits[vehicle] += 1
                 reward += self.goal_reward
                 if self._goal_hits[vehicle] >= self.tour_length(vehicle):
@@ -129,6 +170,10 @@ class WarehouseEnv:
         episode_over = all(self._finished.values())
         timed_out = bool(raw_truncated) and all(raw_truncated.values())
 
+        # One episode boundary for everyone, not per-vehicle: a vehicle that
+        # finishes early is frozen rather than removed, so the whole fleet
+        # starts and stops together. WarehouseVecEnv relies on this to keep its
+        # sub-envs in lockstep.
         terminated = {vehicle: episode_over for vehicle in self.vehicle_ids}
         truncated = {vehicle: timed_out and not episode_over for vehicle in self.vehicle_ids}
 
